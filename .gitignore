@@ -302,3 +302,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/vim,node,macos,linux,polymer,windows,sublimetext,intellij+all,visualstudiocode
+
+dist

@@ -1,0 +1,37 @@
+{
+  "name": "gdgtorino-website",
+  "version": "0.0.1",
+  "description": "GDG Torino's PWA",
+  "main": "dist/gdg-app.js",
+  "scripts": {
+    "build": "tsc",
+    "build:w": "tsc -w",
+    "build:prod": "npm run build && polymer build",
+    "start": "npm run build:w & polymer serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gdgtorino/gdgtorino-website.git"
+  },
+  "author": "GDG Torino IT team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gdgtorino/gdgtorino-website/issues"
+  },
+  "homepage": "https://github.com/gdgtorino/gdgtorino-website#readme",
+  "dependencies": {
+    "@polymer/app-layout": "^3.0.2",
+    "@polymer/iron-icons": "^3.0.1",
+    "@polymer/lit-element": "^0.6.4",
+    "@polymer/paper-icon-button": "^3.0.1",
+    "@polymer/paper-input": "^3.0.1",
+    "@polymer/paper-tabs": "^3.0.1",
+    "@vaadin/router": "^1.2.0",
+    "@webcomponents/webcomponentsjs": "^2.2.1",
+    "lit-html": "^0.14.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
+}
