@@ -1,0 +1,13 @@
+{
+  "entrypoint": "index.html",
+  "shell": "dist/components/gdg-app.js",
+  "sources": [
+    "assets/**/*"
+  ],
+  "extraDependencies": [
+    "node_modules/@webcomponents/webcomponentsjs/**"
+  ],
+  "builds": [],
+  "moduleResolution": "node",
+  "npm": true
+}
