@@ -5,15 +5,9 @@
     "assets/**/*"
   ],
   "extraDependencies": [
-    "node_modules/countdown/*",
     "node_modules/@webcomponents/webcomponentsjs/**"
   ],
-  "builds": [
-    {
-      "preset": "es6-bundled",
-      "addServiceWorker": false
-    }
-  ],
+  "builds": [],
   "moduleResolution": "node",
   "npm": true
 }
