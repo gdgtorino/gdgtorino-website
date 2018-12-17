@@ -17,6 +17,8 @@ import './pages/page-events';
 import './pages/page-team';
 import '../styles/theme';
 
+declare var contentful: any;
+
 @customElement('gdg-app' as any)
 class GdgApp extends LitElement {
 
@@ -25,8 +27,14 @@ class GdgApp extends LitElement {
     @query('#routerOutlet')
     routerOutlet;
     router;
+    client;
 
     firstUpdated() {
+        this.client = contentful.createClient({
+            space: 'g6xke51oy32b',
+            accessToken: '89f161385ef04d41070200fb9b8da5987a405a945cc755b83820d7f656b90730',
+        });
+        this.client.getEntries().then((response) => console.log(response));
         this.router = new Router(this.routerOutlet);
         this.router.setRoutes([
             {path: '/', component: 'page-home'},
@@ -93,7 +101,7 @@ class GdgApp extends LitElement {
                 </app-header>
             
                 <div id="routerOutlet"></div>
-            
+                
               </app-header-layout>
               
             </app-drawer-layout>
