@@ -16,8 +16,8 @@ import './pages/page-about';
 import './pages/page-events';
 import './pages/page-team';
 import '../styles/theme';
+import 'contentful/dist/contentful.browser'
 
-// Workaround because of missing Contentful ES module for browser
 declare var contentful: any;
 
 @customElement('gdg-app' as any)
@@ -35,6 +35,7 @@ class GdgApp extends LitElement {
             space: 'g6xke51oy32b',
             accessToken: '89f161385ef04d41070200fb9b8da5987a405a945cc755b83820d7f656b90730',
         });
+        //this.contentfulClient.getEntries().then((response) => console.log(response)); //savage fetch of all contentful entries, for testing purposes
         const pages = await this.contentfulClient.getEntries({
             'content_type': 'page',
             select: 'fields.slug,fields.component',
