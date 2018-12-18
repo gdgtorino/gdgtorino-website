@@ -26,6 +26,7 @@
     "@polymer/lit-element": "^0.6.4",
     "@polymer/paper-icon-button": "^3.0.1",
     "@polymer/paper-input": "^3.0.1",
+    "@polymer/paper-spinner": "^3.0.1",
     "@polymer/paper-tabs": "^3.0.1",
     "@vaadin/router": "^1.2.0",
     "@webcomponents/webcomponentsjs": "^2.2.1",

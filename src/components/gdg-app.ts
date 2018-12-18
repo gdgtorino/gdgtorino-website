@@ -11,6 +11,7 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
+import '@polymer/paper-spinner/paper-spinner-lite';
 import './pages/page-home';
 import './pages/page-about';
 import './pages/page-events';
@@ -80,6 +81,13 @@ class GdgApp extends LitElement {
                 width: 100%;
                 height: 100%;
               }
+              
+              .loading-overlay {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+                background: white;
+              }
             </style>
             
             <app-drawer-layout fullbleed force-narrow>
@@ -109,6 +117,11 @@ class GdgApp extends LitElement {
               </app-header-layout>
               
             </app-drawer-layout>
+            
+            ${this.page == null ? html`
+              <div class="loading-overlay horizontal layout center-center">
+                <paper-spinner-lite active></paper-spinner-lite>
+              </div>` : null}
         `;
     }
 }
