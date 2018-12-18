@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "es2015",
     "moduleResolution": "node",
     "target": "es6",
     "outDir": "dist",

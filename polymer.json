@@ -8,7 +8,12 @@
     "node_modules/@webcomponents/webcomponentsjs/**",
     "node_modules/contentful/**"
   ],
-  "builds": [],
+  "builds": [
+    {
+      "preset": "es6-bundled",
+      "addServiceWorker": false
+    }
+  ],
   "moduleResolution": "node",
   "npm": true
 }
