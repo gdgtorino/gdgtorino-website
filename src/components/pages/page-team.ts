@@ -1,7 +1,8 @@
-import {customElement, html, LitElement} from '@polymer/lit-element';
+import {customElement, html} from '@polymer/lit-element';
+import {RouterPage} from '../router-page';
 
-@customElement('page-team' as any)
-class PageTeam extends LitElement {
+@customElement('page-team')
+class PageTeam extends RouterPage {
 
     render() {
         return html`

@@ -1,12 +1,13 @@
 import {customElement, html} from '@polymer/lit-element';
 import {RouterPage} from '../router-page';
 
-@customElement('page-about')
-class PageAbout extends RouterPage {
+@customElement('page-notfound')
+class PageNotFound extends RouterPage {
 
     render() {
         return html`
-          <h1>About</h1>
+          <h1>404</h1>
+          Oops, ${this.location.params[0]} is not here...
         `;
     }
 

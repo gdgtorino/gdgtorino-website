@@ -1,7 +1,8 @@
-import {customElement, html, LitElement} from '@polymer/lit-element';
+import {customElement, html} from '@polymer/lit-element';
+import {RouterPage} from '../router-page';
 
-@customElement('page-events' as any)
-class PageEvents extends LitElement {
+@customElement('page-events')
+class PageEvents extends RouterPage {
 
     render() {
         return html`
