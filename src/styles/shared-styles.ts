@@ -197,6 +197,14 @@ export const sharedStyles = html`
       align-content: space-around;
     }
     
+    h1, h2 {
+      color: var(--primary-color);
+    }
+    
+    .page-title {
+      padding: 36px 0 8px 0;
+    }
+    
     .container {
       max-width: 1000px;
       margin: 0 auto;
