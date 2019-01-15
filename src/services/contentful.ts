@@ -10,7 +10,6 @@ const contentfulClient = contentful.createClient({
 export const getRoutingData = (): Promise<any> => {
     return contentfulClient.getEntries({
         'content_type': 'page',
-        select: 'fields.slug,fields.component',
+        select: 'fields.slug,fields.component,fields.mainNavigationItem,fields.name,fields.order',
     });
 };
-

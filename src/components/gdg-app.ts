@@ -9,6 +9,7 @@ import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/iron-icons/iron-icons';
 import '@polymer/paper-icon-button/paper-icon-button';
+import '@polymer/paper-input/paper-input';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
 import '@polymer/paper-spinner/paper-spinner-lite';
@@ -24,17 +25,18 @@ import * as ContentfulService from '../services/contentful';
 @customElement('gdg-app')
 class GdgApp extends LitElement {
 
-    @property()
-    page: string;
-    @query('#routerOutlet')
-    routerOutlet;
+    @property() page: string;
+    @query('#routerOutlet') routerOutlet;
+    @query('#emailInput') emailInput;
+    @query('#mailChimpForm') mailChimpForm;
     router;
+    pagesData;
 
     async firstUpdated() {
-        const pages = await ContentfulService.getRoutingData();
+        this.pagesData = await ContentfulService.getRoutingData();
         this.router = new Router(this.routerOutlet);
         this.router.setRoutes([
-            ...pages.items.map(p => ({
+            ...this.pagesData.items.map(p => ({
                 path: `/${p.fields.slug || ''}`,
                 component: p.fields.component || 'page-generic',
             })),
@@ -49,6 +51,10 @@ class GdgApp extends LitElement {
     }
 
     render() {
+        const navPages = this.pagesData ? this.pagesData.items
+                .filter(page => page.fields.mainNavigationItem === true)
+                .sort((a, b) => a.fields.order < b.fields.order ? -1 : a.fields.order > b.fields.order ? 1 : 0)
+            : [];
         return html`
             ${sharedStyles}
             <style>
@@ -84,6 +90,45 @@ class GdgApp extends LitElement {
                 height: 100vh;
                 background: white;
               }
+              
+              footer {
+                background: var(--paper-grey-100);
+                color: #a5a5a5;
+              }
+              
+              footer > .container {
+                margin-top: 40px;
+                margin-bottom: 40px;
+              }
+              
+              footer a {
+                color: inherit;
+                text-decoration: none;
+                padding: 8px 0;
+              }
+              
+              footer a:hover {
+                text-decoration: underline;
+              }
+              
+              footer a img {
+                vertical-align: middle;
+                margin-right: 12px;
+              }
+              
+              footer .bottom-line {
+                background: var(--paper-grey-200);
+                padding: 8px;
+              }
+              
+              footer .bottom-line img {
+                height: 13px;
+                width: auto;
+              }
+              
+              footer .bottom-line a {
+                margin-left: 16px;
+              }
             </style>
             
             <app-drawer-layout fullbleed force-narrow>
@@ -108,7 +153,57 @@ class GdgApp extends LitElement {
                   </app-toolbar>
                 </app-header>
             
-                <div id="routerOutlet"></div>
+                <div class="vertical layout">
+                
+                  <div id="routerOutlet"></div>
+                  
+                  <footer>
+                    <div class="container horizontal layout wrap">
+                      <div class="flex">
+                        <img src="../../assets/images/logo-grey.svg" class="footer-logo">
+                      </div>
+                      <div class="flex vertical layout">
+                        ${navPages.map(page => html`
+                            <a href="/${page.fields.slug}">${page.fields.name}</a>
+                        `)}
+                      </div>
+                      <div class="flex vertical layout">
+                        <a href="https://facbook.com/gdgtorino" target="_blank"><img src="../../assets/images/facebook.svg"> /gdgtorino</a>
+                        <a href="https://twitter.com/gdgtorino" target="_blank"><img src="../../assets/images/twitter.svg"> @gdgtorino</a>
+                        <a href="https://medium.com/gdgtorino" target="_blank"><img src="../../assets/images/medium.svg"> @gdgtorino</a>
+                        <a href="https://github.com/gdgtorino" target="_blank"><img src="../../assets/images/github.svg"> /gdgtorino</a>
+                      </div>
+                      <div class="flex vertical layout">
+                        <div>Iscriviti alla nostra newsletter per rimanere aggiornato sui prossimi eventi!</div>
+                        <paper-input id="emailInput"
+                                     label="Email"
+                                     type="email"
+                                     required
+                                     auto-validate
+                                     error-message="Inserisci un indirizzo email valido"
+                                     @keypress="${this.onEmailInputKeypress.bind(this)}">
+                          <paper-icon-button slot="suffix"
+                                             icon="arrow-forward"
+                                             title="Iscriviti"
+                                             @click="${this.subscribeToNewsletter.bind(this)}">
+                          </paper-icon-button>
+                        </paper-input>
+                      </div>
+                    </div>
+                    <div class="bottom-line">
+                      <div class="container horizontal layout center">
+                        <div>
+                          Made with <img src="../../assets/images/polymer.svg"> and <img src="../../assets/images/love.svg">
+                          by GDG Torino
+                        </div>
+                        <div class="flex"></div>
+                        <a href="/privacy-policy">Privacy policy</a>
+                        <a href="/terms-of-service">Terms of service</a>
+                      </div>
+                    </div>
+                  </footer>
+                  
+                </div>
                 
               </app-header-layout>
               
@@ -118,6 +213,30 @@ class GdgApp extends LitElement {
               <div class="loading-overlay horizontal layout center-center">
                 <paper-spinner-lite active></paper-spinner-lite>
               </div>` : null}
+            
+            <form id="mailChimpForm"
+                  class="hidden"
+                  action="https://gdgtorino.us13.list-manage.com/subscribe/post?u=5b856731f80e3cf563201f842&amp;id=a4a45eebb0"
+                  method="POST"
+                  target="_blank">
+              <input type="hidden" name="EMAIL">
+              <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <input type="text" name="b_5b856731f80e3cf563201f842_a4a45eebb0" tabindex="-1" value="">
+              </div>
+            </form>
         `;
+    }
+
+    onEmailInputKeypress(event: KeyboardEvent) {
+        if (event.key === 'Enter') {
+            this.subscribeToNewsletter();
+        }
+    }
+
+    subscribeToNewsletter() {
+        if (this.emailInput && this.emailInput.validate()) {
+            this.mailChimpForm.querySelector('input').value = this.emailInput.value;
+            this.mailChimpForm.submit();
+        }
     }
 }
