@@ -8,7 +8,7 @@
     "build:w": "tsc -w",
     "build:prod": "npm run build && polymer build",
     "start": "npm run build:w & polymer serve",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",
