@@ -1,9 +1,9 @@
-import {customElement, html, property} from '@polymer/lit-element';
+import {customElement, html, property} from 'lit-element';
+
 import {RouterPage} from '../router-page';
 import * as EventbriteService from '../../services/eventbrite';
 import '../event-ticket';
 import {sharedStyles} from '../../styles/shared-styles';
-import {until} from 'lit-html/lib/until';
 
 @customElement('page-events')
 class PageEvents extends RouterPage {

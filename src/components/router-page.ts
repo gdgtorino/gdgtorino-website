@@ -1,4 +1,4 @@
-import {LitElement} from '@polymer/lit-element';
+import {LitElement} from 'lit-element';
 
 export interface Location {
     baseUrl?: string;

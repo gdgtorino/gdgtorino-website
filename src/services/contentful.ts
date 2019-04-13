@@ -13,3 +13,7 @@ export const getRoutingData = (): Promise<any> => {
         select: 'fields.slug,fields.component,fields.mainNavigationItem,fields.name,fields.order',
     });
 };
+
+export const getGdg = (): Promise<any> => {
+    return contentfulClient.getEntry('11pVnPX4AKqcCIAyyYwqI6');
+};

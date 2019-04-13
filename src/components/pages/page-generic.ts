@@ -1,4 +1,4 @@
-import {customElement, html} from '@polymer/lit-element';
+import {customElement, html} from 'lit-element';
 import {RouterPage} from '../router-page';
 
 @customElement('page-generic')

@@ -1,4 +1,4 @@
-import {customElement, LitElement, property, html, query} from '@polymer/lit-element';
+import {customElement, LitElement, property, html, query} from 'lit-element';
 import {sharedStyles} from '../styles/shared-styles';
 import {Router} from '@vaadin/router';
 

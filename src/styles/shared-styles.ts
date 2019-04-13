@@ -1,4 +1,4 @@
-import {html} from '@polymer/lit-element';
+import {html} from 'lit-element';
 
 export const sharedStyles = html`
   <style>
@@ -222,6 +222,14 @@ export const sharedStyles = html`
       .hide-on-narrow {
         display: none;
       }
+    }
+    
+    .section {
+      padding: 40px 0 80px 0;
+    }
+    
+    .grey-bg {
+      background: var(--paper-grey-100);
     }
   </style>
 `;

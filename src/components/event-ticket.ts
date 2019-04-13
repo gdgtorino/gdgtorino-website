@@ -1,4 +1,4 @@
-import {customElement, LitElement, html, property} from '@polymer/lit-element';
+import {customElement, LitElement, html, property} from 'lit-element';
 import '@polymer/paper-card/paper-card';
 import '@polymer/iron-image/iron-image';
 import {sharedStyles} from '../styles/shared-styles';
@@ -29,6 +29,7 @@ class EventTicket extends LitElement {
             
             <style>
               :host {
+                display: block;
                 transition: filter .3s ease;
                 filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
               }
@@ -40,18 +41,8 @@ class EventTicket extends LitElement {
               .ticket-container {
                 border-radius: 4px;
                 background: white;
-                transition: box-shadow .3s ease;
                 cursor: pointer;
                 clip-path: url(#ticketClipPath);
-                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                            0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                            0 3px 1px -2px rgba(0, 0, 0, 0.2);
-              }
-              
-              :host(:hover) > .ticket-container {
-                box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
-                            0 1px 18px 0 rgba(0, 0, 0, 0.12),
-                            0 3px 5px -1px rgba(0, 0, 0, 0.4);
               }
               
               .cover-image-container {
