@@ -303,4 +303,8 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/vim,node,macos,linux,polymer,windows,sublimetext,intellij+all,visualstudiocode
 
+# Dist folder
 dist
+
+# Rollup typescript plugin cache
+.rpt2_cache

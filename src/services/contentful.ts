@@ -1,6 +1,6 @@
 import 'contentful/dist/contentful.browser';
 
-declare var contentful: any;
+export declare var contentful: any;
 
 const contentfulClient = contentful.createClient({
     space: 'g6xke51oy32b',

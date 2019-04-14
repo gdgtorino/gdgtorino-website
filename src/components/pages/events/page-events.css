@@ -1,0 +1,11 @@
+event-ticket {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.head {
+    font-weight: 200;
+    font-size: 18px;
+    color: var(--paper-grey-500);
+    margin: 40px 0;
+}

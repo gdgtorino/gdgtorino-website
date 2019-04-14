@@ -4,10 +4,9 @@
   "description": "GDG Torino's PWA",
   "main": "dist/gdg-app.js",
   "scripts": {
-    "build": "tsc",
-    "build:w": "tsc -w",
-    "build:prod": "npm run build && polymer build",
-    "start": "npm run build:w & polymer serve",
+    "build": "rollup -c",
+    "build:w": "rollup -cw",
+    "start": "npm run build:w & live-server --no-browser --port=8080 --entry-file=./dist/index.html ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,12 +29,19 @@
     "@polymer/paper-spinner": "^3.0.1",
     "@polymer/paper-tabs": "^3.0.1",
     "@vaadin/router": "^1.2.0",
-    "@webcomponents/webcomponentsjs": "^2.2.1",
-    "contentful": "^7.0.5",
-    "lit-element": "^2.0.0-rc.2",
-    "lit-html": "^1.0.0-rc.2"
+    "contentful": "^7.5.0",
+    "lit-element": "^2.1.0",
+    "lit-html": "^1.0.0"
   },
   "devDependencies": {
-    "typescript": "^3.2.2"
+    "@open-wc/building-rollup": "^0.3.0",
+    "http-server": "^0.11.1",
+    "live-server": "^1.2.1",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.10.0",
+    "rollup-plugin-cpy": "^1.1.0",
+    "rollup-plugin-lit-css": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.20.1",
+    "typescript": "^3.4.3"
   }
 }

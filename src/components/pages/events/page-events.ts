@@ -1,17 +1,18 @@
 import {customElement, html, property} from 'lit-element';
 
-import {RouterPage} from '../router-page';
-import * as EventbriteService from '../../services/eventbrite';
-import '../event-ticket';
-import {sharedStyles} from '../../styles/shared-styles';
+import sharedStyles from '../../../styles/shared-styles.css';
+import style from './page-events.css';
+import * as EventbriteService from '../../../services/eventbrite';
+import {RouterPage} from '../../router-page';
+import '../../event-ticket/event-ticket';
 
 @customElement('page-events')
 class PageEvents extends RouterPage {
 
-   @property()
-   pastEvents;
-   @property()
-   upcomingEvents;
+   static styles = [style, sharedStyles];
+
+   @property() pastEvents;
+   @property() upcomingEvents;
 
     async firstUpdated() {
         this.pastEvents = await EventbriteService.fetchPastEvents();
@@ -23,22 +24,6 @@ class PageEvents extends RouterPage {
         const upcomingEvents = this.upcomingEvents ? (<any>this.upcomingEvents).events : [];
 
         return html`
-          ${sharedStyles}
-          
-          <style>
-            event-ticket {
-              width: 100%;
-              margin-bottom: 60px;
-            }
-            
-            .head {
-              font-weight: 200;
-              font-size: 18px;
-              color: var(--paper-grey-500);
-              margin: 40px 0;
-            }
-          </style>
-          
           <div class="container">
             <h1 class="page-title">Eventi</h1>
             

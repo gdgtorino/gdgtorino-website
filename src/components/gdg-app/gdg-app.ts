@@ -1,7 +1,10 @@
 import {customElement, LitElement, property, html, query} from 'lit-element';
-import {sharedStyles} from '../styles/shared-styles';
 import {Router} from '@vaadin/router';
 
+import style from './gdg-app.css';
+console.log('styles', style);
+import sharedStyles from '../../styles/shared-styles.css';
+import * as ContentfulService from '../../services/contentful';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-drawer/app-drawer';
@@ -13,17 +16,18 @@ import '@polymer/paper-input/paper-input';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
 import '@polymer/paper-spinner/paper-spinner-lite';
-import './pages/page-home';
-import './pages/page-about';
-import './pages/page-events';
-import './pages/page-team';
-import './pages/page-generic';
-import './pages/page-notfound';
-import '../styles/theme';
-import * as ContentfulService from '../services/contentful';
+import '../pages/home/page-home';
+import '../pages/about/page-about';
+import '../pages/events/page-events';
+import '../pages/team/page-team';
+import '../pages/generic/page-generic';
+import '../pages/notfound/page-notfound';
+import '../../styles/theme';
 
 @customElement('gdg-app')
 class GdgApp extends LitElement {
+
+    static styles = [sharedStyles, style];
 
     @property() page: string;
     @query('#routerOutlet') routerOutlet;
@@ -56,81 +60,6 @@ class GdgApp extends LitElement {
                 .sort((a, b) => a.fields.order < b.fields.order ? -1 : a.fields.order > b.fields.order ? 1 : 0)
             : [];
         return html`
-            ${sharedStyles}
-            <style>
-              app-toolbar {
-                height: 56px;
-              }
-              
-              paper-tab {
-                padding: 0 16px;
-              }
-              
-              paper-tab a {
-                text-decoration: none;
-                color: inherit;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              }
-              
-              .logo {
-                height: 48px;
-                width: auto;
-              }
-              
-              #routerOutlet {
-                width: 100%;
-                height: 100%;
-              }
-              
-              .loading-overlay {
-                position: relative;
-                width: 100vw;
-                height: 100vh;
-                background: white;
-              }
-              
-              footer {
-                background: var(--paper-grey-100);
-                color: #a5a5a5;
-              }
-              
-              footer > .container {
-                margin-top: 40px;
-                margin-bottom: 40px;
-              }
-              
-              footer a {
-                color: inherit;
-                text-decoration: none;
-                padding: 8px 0;
-              }
-              
-              footer a:hover {
-                text-decoration: underline;
-              }
-              
-              footer a img {
-                vertical-align: middle;
-                margin-right: 12px;
-              }
-              
-              footer .bottom-line {
-                background: var(--paper-grey-200);
-                padding: 8px;
-              }
-              
-              footer .bottom-line img {
-                height: 13px;
-                width: auto;
-              }
-              
-              footer .bottom-line a {
-                margin-left: 16px;
-              }
-            </style>
-            
             <app-drawer-layout fullbleed force-narrow>
             
               <app-drawer slot="drawer">
