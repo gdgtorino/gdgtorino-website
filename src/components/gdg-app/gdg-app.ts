@@ -2,7 +2,6 @@ import {customElement, LitElement, property, html, query} from 'lit-element';
 import {Router} from '@vaadin/router';
 
 import style from './gdg-app.css';
-console.log('styles', style);
 import sharedStyles from '../../styles/shared-styles.css';
 import * as ContentfulService from '../../services/contentful';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
