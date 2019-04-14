@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "build:w": "rollup -cw",
-    "start": "npm run build:w & live-server --no-browser --port=8080 --entry-file=./dist/index.html ./dist",
+    "start": "npm run build:w & live-server --no-browser --port=8080 --entry-file=index.html ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
