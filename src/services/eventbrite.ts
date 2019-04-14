@@ -1,6 +1,7 @@
 const baseUrl = 'https://www.eventbriteapi.com/v3/';
-const organizationId = '9764068365';
-const token = 'DPXS6C3R4TYXRBQ4UDCD';
+import * as configuration from '../../config.json';
+
+const {organizationId, token} = configuration.eventbrite;
 
 export const fetchUpcomingEvents = () => {
     return fetch(`${baseUrl}events/search/?token=${token}&organizer.id=${organizationId}&sort_by=-date&expand=venue`)

@@ -4,6 +4,7 @@
     "moduleResolution": "node",
     "target": "ESNext",
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "lib": [
       "es2017",
       "dom"

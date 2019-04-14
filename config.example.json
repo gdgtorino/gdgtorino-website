@@ -1,0 +1,10 @@
+{
+  "contentful": {
+    "space": "<SPACE_ID>",
+    "accessToken": "<ACCESS_TOKEN>"
+  },
+  "eventbrite": {
+    "organizationId": "<ORGANIZATION_ID>",
+    "token": "<TOKEN>"
+  }
+}

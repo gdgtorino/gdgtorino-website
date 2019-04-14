@@ -308,3 +308,6 @@ dist
 
 # Rollup typescript plugin cache
 .rpt2_cache
+
+# Configuration
+config.json

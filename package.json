@@ -40,6 +40,7 @@
     "rimraf": "^2.6.3",
     "rollup": "^1.10.0",
     "rollup-plugin-cpy": "^1.1.0",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-lit-css": "^2.0.0",
     "rollup-plugin-typescript2": "^0.20.1",
     "typescript": "^3.4.3"

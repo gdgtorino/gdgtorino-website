@@ -1,11 +1,9 @@
 import 'contentful/dist/contentful.browser';
+import * as configuration from '../../config.json';
 
 export declare var contentful: any;
 
-const contentfulClient = contentful.createClient({
-    space: 'g6xke51oy32b',
-    accessToken: '89f161385ef04d41070200fb9b8da5987a405a945cc755b83820d7f656b90730',
-});
+const contentfulClient = contentful.createClient(configuration.contentful);
 
 export const getRoutingData = (): Promise<any> => {
     return contentfulClient.getEntries({
