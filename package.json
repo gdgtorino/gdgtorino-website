@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "build:w": "rollup -cw",
+    "build:prod": "rollup -c --environment BUILD:production",
     "start": "npm run build:w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

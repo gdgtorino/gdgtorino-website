@@ -32,6 +32,12 @@ The following command starts typescript compilation in watch mode and the live d
 $ npm run start
 ```
 
+to build for production run:
+
+```bash
+$ npm run build:prod
+```
+
 ### License
 
 This project is licensed under the MIT License, see [LICENSE](./LICENSE) file for details. 
