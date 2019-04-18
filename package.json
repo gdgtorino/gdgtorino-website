@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rollup -c",
     "build:w": "rollup -cw",
-    "start": "npm run build:w & live-server --no-browser --port=8080 --entry-file=index.html ./dist",
+    "start": "npm run build:w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,12 +36,12 @@
   "devDependencies": {
     "@open-wc/building-rollup": "^0.3.0",
     "http-server": "^0.11.1",
-    "live-server": "^1.2.1",
     "rimraf": "^2.6.3",
     "rollup": "^1.10.0",
     "rollup-plugin-cpy": "^1.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-lit-css": "^2.0.0",
+    "rollup-plugin-live-server": "^1.0.3",
     "rollup-plugin-typescript2": "^0.20.1",
     "typescript": "^3.4.3"
   }
