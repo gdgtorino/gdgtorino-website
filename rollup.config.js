@@ -23,7 +23,7 @@ export default configs.map((config, index) => ({
         json(),
         litcss(),
         typescript(),
-        index === 0 ? cpy({
+        index === 0 && inProd ? cpy({
             files: 'assets/**/*',
             dest: 'dist/',
             options: {
@@ -35,9 +35,9 @@ export default configs.map((config, index) => ({
             host: 'localhost',
             root: 'dist',
             file: 'index.html',
-            mount: [['/dist', './dist'], ['/node_modules', './node_modules']],
-            open: true,
-            wait: 1000
+            mount: [['/dist', './dist'], ['/node_modules', './node_modules'], ['/assets', './assets']],
+            open: false,
+            wait: 500,
         }) : null,
     ],
     watch: {
