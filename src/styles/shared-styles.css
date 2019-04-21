@@ -201,6 +201,10 @@ h1, h2 {
     padding: 36px 0 8px 0;
 }
 
+.page-content {
+    min-height: 500px;
+}
+
 .container {
     max-width: 1000px;
     margin: 0 auto;

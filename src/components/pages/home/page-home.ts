@@ -9,6 +9,7 @@ import {RouterPage} from '../../router-page';
 import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icon/iron-icon';
 import '../../event-ticket/event-ticket';
+import {repeat} from 'lit-html/directives/repeat';
 
 @customElement('page-home')
 class PageHome extends RouterPage {
@@ -41,7 +42,13 @@ class PageHome extends RouterPage {
           
           <div class="container section">
             <h3>I nostri partner</h3>
-            <div style="height: 250px;"></div>
+            <div class="partners horizontal layout wrap center-center">
+              ${until(ContentfulService.getPartners().then(partners =>
+                repeat(partners.items, (p: any) => html`
+                  <img class="partner-logo" src=${p.fields.logo.fields.file.url} alt=${p.fields.name + ' logo'}>
+                `)
+              ))}
+            </div>
           </div>
         `;
     }

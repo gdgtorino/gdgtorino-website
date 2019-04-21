@@ -24,3 +24,13 @@
 .body-link:hover {
     text-decoration: underline;
 }
+
+.partners {
+    padding: 40px 0;
+}
+
+.partner-logo {
+    width: 100px;
+    height: auto;
+    margin: 16px;
+}

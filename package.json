@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/gdgtorino/gdgtorino-website#readme",
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^13.1.0",
     "@polymer/app-layout": "^3.0.2",
     "@polymer/iron-icons": "^3.0.1",
     "@polymer/iron-image": "^3.0.1",
@@ -39,10 +40,16 @@
     "http-server": "^0.11.1",
     "rimraf": "^2.6.3",
     "rollup": "^1.10.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-cpy": "^1.1.0",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-lit-css": "^2.0.0",
     "rollup-plugin-live-server": "^1.0.3",
+    "rollup-plugin-minify-html-literals": "^1.2.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-typescript2": "^0.20.1",
     "typescript": "^3.4.3"
   }
