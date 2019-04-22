@@ -38,6 +38,17 @@ to build for production run:
 $ npm run build:prod
 ```
 
+### Build Contentful types
+
+TypeScript interfaces corresponding to Content Types on Contentful can be built (or updated after changes in the CMS)
+using the following command:
+
+```bash
+$ npm run build:ctypes
+```
+
+**Note** that this needs a `managementToken` and a `space` to be set in config.json to work properly.
+
 ### License
 
 This project is licensed under the MIT License, see [LICENSE](./LICENSE) file for details. 
