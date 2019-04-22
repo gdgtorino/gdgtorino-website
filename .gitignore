@@ -311,3 +311,6 @@ dist
 
 # Configuration
 config.json
+
+# Contentful schema
+contentful-schema.json

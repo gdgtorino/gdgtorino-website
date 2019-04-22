@@ -7,6 +7,7 @@
     "build": "rollup -c",
     "build:w": "rollup -cw",
     "build:prod": "rollup -c --environment BUILD:production",
+    "build:ctypes": "node build-contentful-types.js",
     "start": "npm run build:w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,8 +33,10 @@
     "@polymer/paper-tabs": "^3.0.1",
     "@vaadin/router": "^1.2.0",
     "contentful": "^7.5.0",
+    "contentful-ts-generator": "^0.2.2",
     "lit-element": "^2.1.0",
-    "lit-html": "^1.0.0"
+    "lit-html": "^1.0.0",
+    "yargs": "^13.2.2"
   },
   "devDependencies": {
     "@open-wc/building-rollup": "^0.3.0",
