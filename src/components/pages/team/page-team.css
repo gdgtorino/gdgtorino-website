@@ -1,0 +1,30 @@
+.organizer {
+    display: flex;
+    flex-direction: column;
+    margin: 16px;
+    text-align: center;
+}
+
+.organizer .name {
+    padding: 16px 0 8px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.organizer-pic {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    background-size: cover;
+    background-color: #EEE;
+}
+
+.team-name {
+    font-size: 32px;
+    margin-top: 38px;
+}
+
+.organizers {
+    padding: 36px 0 20px 0;
+}
