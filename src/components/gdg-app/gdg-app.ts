@@ -22,6 +22,9 @@ import '../pages/team/page-team';
 import '../pages/generic/page-generic';
 import '../pages/notfound/page-notfound';
 import '../../styles/theme';
+import {repeat} from 'lit-html/directives/repeat';
+import {IPageFields} from '../../content-types/generated';
+import {Entry} from 'contentful';
 
 @customElement('gdg-app')
 class GdgApp extends LitElement {
@@ -54,10 +57,8 @@ class GdgApp extends LitElement {
     }
 
     render() {
-        const navPages = this.pagesData ? this.pagesData.items
-                .filter(page => page.fields.mainNavigationItem === true)
-                .sort((a, b) => a.fields.order < b.fields.order ? -1 : a.fields.order > b.fields.order ? 1 : 0)
-            : [];
+        const navPages: Entry<IPageFields>[] = this.pagesData ? this.pagesData.items
+                .filter(page => page.fields.mainNavigationItem) : [];
         return html`
             <app-drawer-layout fullbleed force-narrow>
             
@@ -91,7 +92,7 @@ class GdgApp extends LitElement {
                         <img src="../../assets/images/logo-grey.svg" class="footer-logo">
                       </div>
                       <div class="flex vertical layout">
-                        ${navPages.map(page => html`
+                        ${repeat(navPages, (page: Entry<IPageFields>) => html`
                             <a href="/${page.fields.slug}">${page.fields.name}</a>
                         `)}
                       </div>
