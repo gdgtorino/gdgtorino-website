@@ -1,27 +1,34 @@
 import {customElement, html, property} from 'lit-element';
+import {unsafeHTML} from 'lit-html/directives/unsafe-html';
 import {until} from 'lit-html/directives/until';
-import * as renderer from '@contentful/rich-text-html-renderer';
+import {Document} from '@contentful/rich-text-types';
+import {documentToHtmlString} from '@contentful/rich-text-html-renderer';
 
-import * as ContentfulService from '../../../services/contentful';
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-about.css';
 import {RouterPage} from '../../router-page';
-import {unsafeHTML} from 'lit-html/directives/unsafe-html';
 
 @customElement('page-about')
 class PageAbout extends RouterPage {
 
     static styles = [style, sharedStyles];
 
-    @property() body = ContentfulService.getAbout()
-        .then(about => renderer.documentToHtmlString(about.items[0].fields.body));
+    @property() body: Promise<Document>;
+
+    onBeforeEnter() {
+        this.body = this.pageData.getBody();
+    }
 
     render() {
         return html`
-          <div class="container page-content">
-            <h1>About</h1>
+          <div class="container">
+            <h1 class="page-title">About</h1>
             
-            <div>${until(this.body.then(body => unsafeHTML(body)))}</div>
+            <div class="page-content">
+              ${until(this.body.then(body =>
+                unsafeHTML(documentToHtmlString(body))
+              ))}
+            </div>
           </div>
         `;
     }
