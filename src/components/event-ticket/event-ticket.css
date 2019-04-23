@@ -8,10 +8,14 @@
     filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.2));
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .ticket-container {
     border-radius: 4px;
     background: white;
-    cursor: pointer;
     clip-path: url(#ticketClipPath);
 }
 

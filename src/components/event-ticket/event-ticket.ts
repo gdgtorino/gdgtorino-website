@@ -37,28 +37,30 @@ class EventTicket extends LitElement {
                 </defs>
             </svg>
             
-            <div class="ticket-container horizontal layout">
-              <div class="cover-image-container">
-                <div class="cover-image">
-                  <iron-image sizing="cover" fade src="${this.event.logo.original.url}" alt="Event cover image"></iron-image>
+            <a href="${this.event.url}" target="_blank">
+              <div class="ticket-container horizontal layout">
+                <div class="cover-image-container">
+                  <div class="cover-image">
+                    <iron-image sizing="cover" fade src="${this.event.logo.original.url}" alt="Event cover image"></iron-image>
+                  </div>
+                </div>
+                
+                <div class="flex vertical layout info">
+                  <h3>${this.event.name.text}</h3>
+                  <div class="caption">
+                    <div>${dateString}</div>
+                    <div>Ore ${timeString}</div>
+                  </div>
+                  ${this.event.venue ? html`
+                      <div class="caption">
+                        <div>${this.event.venue.name}</div>
+                        <div>${this.event.venue.address.localized_address_display}</div>
+                      </div>
+                  ` : null}
+                  <div class="flex description">${this.event.description.text}</div>
                 </div>
               </div>
-              
-              <div class="flex vertical layout info">
-                <h3>${this.event.name.text}</h3>
-                <div class="caption">
-                  <div>${dateString}</div>
-                  <div>Ore ${timeString}</div>
-                </div>
-                ${this.event.venue ? html`
-                    <div class="caption">
-                      <div>${this.event.venue.name}</div>
-                      <div>${this.event.venue.address.localized_address_display}</div>
-                    </div>
-                ` : null}
-                <div class="flex description">${this.event.description.text}</div>
-              </div>
-            </div>
+            </a>
         `;
     }
 
