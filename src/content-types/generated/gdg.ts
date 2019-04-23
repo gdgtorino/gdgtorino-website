@@ -1,10 +1,13 @@
-import { Asset, Entry, IAsset, IEntry, ILink, isAsset, ISys } from "../base";
+import { wrap } from ".";
+import { Asset, Entry, IAsset, IEntry, ILink, isAsset, isEntry, ISys } from "../base";
+import { ISocialLink, SocialLink } from "./social_link";
 
 export interface IGdgFields {
   location?: string;
   logo?: ILink<'Asset'> | IAsset;
   description?: string;
   abstract?: string;
+  socialLinks?: Array<ILink<'Entry'> | ISocialLink>;
 }
 
 /**
@@ -40,6 +43,20 @@ export class Gdg extends Entry<IGdgFields> implements IGdg {
 
   get abstract(): string | undefined {
     return this.fields.abstract
+  }
+
+  get socialLinks(): Array<SocialLink | null> | undefined {
+    return !this.fields.socialLinks ? undefined :
+      this.fields.socialLinks.map((item) =>
+        isEntry(item) ? wrap<'socialLink'>(item) : null
+      )
+  }
+
+  get social_links(): Array<SocialLink | null> | undefined {
+    return !this.fields.socialLinks ? undefined :
+      this.fields.socialLinks.map((item) =>
+        isEntry(item) ? wrap<'socialLink'>(item) : null
+      )
   }
 
   constructor(entry: IGdg);

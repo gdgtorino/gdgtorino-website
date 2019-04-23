@@ -1,16 +1,20 @@
 import { wrap } from ".";
 import { Asset, Entry, IAsset, IEntry, ILink, isAsset, isEntry, ISys } from "../base";
+import { ISocialLink, SocialLink } from "./social_link";
 import { ITeam, Team } from "./team";
 
 export interface IOrganizerFields {
   name?: string;
-  profilePicture?: ILink<'Asset'> | IAsset;
-  role?: string;
-  bio?: string;
-  linkedin?: string;
-  website?: string;
   inTeam?: ILink<'Entry'> | ITeam;
+  level: OrganizerLevel;
+  role?: string;
+  profilePicture?: ILink<'Asset'> | IAsset;
+  socialLinks?: Array<ILink<'Entry'> | ISocialLink>;
+  bio?: string;
+  website?: string;
 }
+
+export type OrganizerLevel = 'General manager' | 'Lead' | 'Manager' | 'Specialist';
 
 /**
  * Organizer
@@ -34,6 +38,24 @@ export class Organizer extends Entry<IOrganizerFields> implements IOrganizer {
     return this.fields.name
   }
 
+  get inTeam(): Team | null | undefined {
+    return !this.fields.inTeam ? undefined :
+      (isEntry(this.fields.inTeam) ? wrap<'team'>(this.fields.inTeam) : null)
+  }
+
+  get in_team(): Team | null | undefined {
+    return !this.fields.inTeam ? undefined :
+      (isEntry(this.fields.inTeam) ? wrap<'team'>(this.fields.inTeam) : null)
+  }
+
+  get level(): OrganizerLevel {
+    return this.fields.level
+  }
+
+  get role(): string | undefined {
+    return this.fields.role
+  }
+
   get profilePicture(): Asset | null | undefined {
     return !this.fields.profilePicture ? undefined :
       (isAsset(this.fields.profilePicture) ? new Asset(this.fields.profilePicture) : null)
@@ -44,30 +66,26 @@ export class Organizer extends Entry<IOrganizerFields> implements IOrganizer {
       (isAsset(this.fields.profilePicture) ? new Asset(this.fields.profilePicture) : null)
   }
 
-  get role(): string | undefined {
-    return this.fields.role
+  get socialLinks(): Array<SocialLink | null> | undefined {
+    return !this.fields.socialLinks ? undefined :
+      this.fields.socialLinks.map((item) =>
+        isEntry(item) ? wrap<'socialLink'>(item) : null
+      )
+  }
+
+  get social_links(): Array<SocialLink | null> | undefined {
+    return !this.fields.socialLinks ? undefined :
+      this.fields.socialLinks.map((item) =>
+        isEntry(item) ? wrap<'socialLink'>(item) : null
+      )
   }
 
   get bio(): string | undefined {
     return this.fields.bio
   }
 
-  get linkedin(): string | undefined {
-    return this.fields.linkedin
-  }
-
   get website(): string | undefined {
     return this.fields.website
-  }
-
-  get inTeam(): Team | null | undefined {
-    return !this.fields.inTeam ? undefined :
-      (isEntry(this.fields.inTeam) ? wrap<'team'>(this.fields.inTeam) : null)
-  }
-
-  get in_team(): Team | null | undefined {
-    return !this.fields.inTeam ? undefined :
-      (isEntry(this.fields.inTeam) ? wrap<'team'>(this.fields.inTeam) : null)
   }
 
   constructor(entry: IOrganizer);
