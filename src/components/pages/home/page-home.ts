@@ -17,6 +17,7 @@ class PageHome extends RouterPage {
     static styles = [style, sharedStyles];
 
     @property() gdg = ContentfulService.getGdg();
+    @property() highlightedEvents = EventbriteService.getHighlightedEvents();
 
     render() {
         return html`
@@ -31,12 +32,12 @@ class PageHome extends RouterPage {
           <div class="section grey-bg">
             <div class="container">
               <div class="horizontal layout center">
-                <h3 class="flex">Il prossimo evento</h3>
+                <h3 class="flex">Eventi in evidenza</h3>
                 <a href="/events" class="body-link">Tutti gli eventi <iron-icon icon="arrow-forward"></iron-icon></a>
               </div>
-              ${until(EventbriteService.fetchPastEvents().then(data => html`
-                <event-ticket .event=${data.events[0]}></event-ticket>
-              `))}
+              ${until(this.highlightedEvents.then(events => repeat(events, event => html`
+                <event-ticket .event=${event}></event-ticket>
+              `)))}
             </div>
           </div>
           
