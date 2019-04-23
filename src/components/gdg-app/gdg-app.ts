@@ -1,4 +1,7 @@
-import {customElement, LitElement, property, html, query} from 'lit-element';
+import {customElement, html, LitElement, property, query} from 'lit-element';
+import {repeat} from 'lit-html/directives/repeat';
+import {Entry, EntryCollection} from 'contentful';
+import {Document} from '@contentful/rich-text-types';
 import {Router} from '@vaadin/router';
 
 import style from './gdg-app.css';
@@ -22,9 +25,8 @@ import '../pages/team/page-team';
 import '../pages/generic/page-generic';
 import '../pages/notfound/page-notfound';
 import '../../styles/theme';
-import {repeat} from 'lit-html/directives/repeat';
 import {IPageFields} from '../../content-types/generated';
-import {Entry} from 'contentful';
+import {PageData} from '../router-page';
 
 @customElement('gdg-app')
 class GdgApp extends LitElement {
@@ -35,8 +37,8 @@ class GdgApp extends LitElement {
     @query('#routerOutlet') routerOutlet;
     @query('#emailInput') emailInput;
     @query('#mailChimpForm') mailChimpForm;
-    router;
-    pagesData;
+    pagesData: EntryCollection<IPageFields>;
+    router: Router;
 
     async firstUpdated() {
         this.pagesData = await ContentfulService.getRoutingData();
@@ -45,6 +47,16 @@ class GdgApp extends LitElement {
             ...this.pagesData.items.map(p => ({
                 path: `/${p.fields.slug || ''}`,
                 component: p.fields.component || 'page-generic',
+                action: (context, commands) => {
+                    const component = commands.component(context.route.component);
+                    component.pageData = <PageData>{
+                        ...p.fields,
+                        getBody(): Promise<Document> {
+                            return ContentfulService.getPageBody(p.sys.id);
+                        },
+                    };
+                    return component;
+                },
             })),
             {
                 path: '(.*)',
@@ -75,9 +87,9 @@ class GdgApp extends LitElement {
                     <paper-tabs .selected=${this.page}
                                 attr-for-selected="name"
                                 class="hide-on-narrow">
-                      <paper-tab link name="about"><a href="./about">About</a></paper-tab>
-                      <paper-tab link name="eventi"><a href="./eventi">Eventi</a></paper-tab>
-                      <paper-tab link name="team"><a href="./team">Team</a></paper-tab>
+                      ${repeat(navPages.filter(p => p.fields.slug), (page: Entry<IPageFields>) => html`
+                        <paper-tab link name=${page.fields.slug}><a href="./${page.fields.slug}">${page.fields.name}</a></paper-tab>
+                      `)}
                     </paper-tabs>
                   </app-toolbar>
                 </app-header>
@@ -93,7 +105,7 @@ class GdgApp extends LitElement {
                       </div>
                       <div class="flex vertical layout">
                         ${repeat(navPages, (page: Entry<IPageFields>) => html`
-                            <a href="/${page.fields.slug}">${page.fields.name}</a>
+                            <a href="/${page.fields.slug || ''}">${page.fields.name}</a>
                         `)}
                       </div>
                       <div class="flex vertical layout">
@@ -127,7 +139,7 @@ class GdgApp extends LitElement {
                         </div>
                         <div class="flex"></div>
                         <a href="/privacy-policy">Privacy policy</a>
-                        <a href="/terms-of-service">Terms of service</a>
+                        <a href="/termini-di-servizio">Termini di servizio</a>
                       </div>
                     </div>
                   </footer>
