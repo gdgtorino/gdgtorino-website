@@ -15,8 +15,8 @@ class PageEvents extends RouterPage {
    @property() upcomingEvents;
 
     async firstUpdated() {
-        this.pastEvents = await EventbriteService.fetchPastEvents();
-        this.upcomingEvents = await EventbriteService.fetchUpcomingEvents();
+        this.pastEvents = await EventbriteService.getPastEvents();
+        this.upcomingEvents = await EventbriteService.getUpcomingEvents();
     }
 
     render() {
