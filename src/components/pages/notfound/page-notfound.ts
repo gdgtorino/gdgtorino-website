@@ -11,8 +11,13 @@ class PageNotFound extends RouterPage {
 
     render() {
         return html`
-          <h1>404</h1>
-          Oops, ${this.location.params[0]} is not here...
+          <div class="container">
+            <h1 class="page-title">404</h1>
+            
+            <div class="page-content">
+              Oops, ${this.location.params[0]} is not here...
+            </div>
+          </div>
         `;
     }
 
