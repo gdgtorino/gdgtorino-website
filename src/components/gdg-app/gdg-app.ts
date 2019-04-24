@@ -21,7 +21,7 @@ import '@polymer/paper-spinner/paper-spinner-lite';
 import '../pages/home/page-home';
 import '../pages/about/page-about';
 import '../pages/events/page-events';
-import '../pages/team/page-team';
+import '../pages/organizers/page-organizers';
 import '../pages/generic/page-generic';
 import '../pages/notfound/page-notfound';
 import '../../styles/theme';

@@ -41,6 +41,7 @@ export const getPartners = (): Promise<EntryCollection<IPartnerFields>> => {
 export const getOrganizers = (): Promise<Entry<IOrganizerFields>[]> => {
     return contentfulClient.getEntries<IOrganizerFields>({
         content_type: 'organizer',
+        order: 'fields.level',
     }).then(data => data.items);
 };
 
