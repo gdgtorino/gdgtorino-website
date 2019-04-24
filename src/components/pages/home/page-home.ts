@@ -33,7 +33,7 @@ class PageHome extends RouterPage {
             <div class="container">
               <div class="horizontal layout center">
                 <h3 class="flex">Eventi in evidenza</h3>
-                <a href="/events" class="body-link">Tutti gli eventi <iron-icon icon="arrow-forward"></iron-icon></a>
+                <a href="/eventi" class="body-link">Tutti gli eventi <iron-icon icon="arrow-forward"></iron-icon></a>
               </div>
               ${until(this.highlightedEvents.then(events => repeat(events, event => html`
                 <event-ticket .event=${event}></event-ticket>

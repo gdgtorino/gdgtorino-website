@@ -3,6 +3,7 @@ import {repeat} from 'lit-html/directives/repeat';
 import {Entry, EntryCollection} from 'contentful';
 import {Document} from '@contentful/rich-text-types';
 import {Router} from '@vaadin/router';
+import {until} from 'lit-html/directives/until';
 
 import style from './gdg-app.css';
 import sharedStyles from '../../styles/shared-styles.css';
@@ -34,6 +35,7 @@ class GdgApp extends LitElement {
     static styles = [sharedStyles, style];
 
     @property() page: string;
+    @property() gdg = ContentfulService.getGdg();
     @query('#routerOutlet') routerOutlet;
     @query('#emailInput') emailInput;
     @query('#mailChimpForm') mailChimpForm;
@@ -70,7 +72,7 @@ class GdgApp extends LitElement {
 
     render() {
         const navPages: Entry<IPageFields>[] = this.pagesData ? this.pagesData.items
-                .filter(page => page.fields.mainNavigationItem) : [];
+            .filter(page => page.fields.mainNavigationItem) : [];
         return html`
             <app-drawer-layout fullbleed force-narrow>
             
@@ -109,20 +111,20 @@ class GdgApp extends LitElement {
                         `)}
                       </div>
                       <div class="flex vertical layout">
-                        <a href="https://facbook.com/gdgtorino" target="_blank"><img src="../../assets/images/facebook.svg"> /gdgtorino</a>
-                        <a href="https://twitter.com/gdgtorino" target="_blank"><img src="../../assets/images/twitter.svg"> @gdgtorino</a>
-                        <a href="https://medium.com/gdgtorino" target="_blank"><img src="../../assets/images/medium.svg"> @gdgtorino</a>
-                        <a href="https://github.com/gdgtorino" target="_blank"><img src="../../assets/images/github.svg"> /gdgtorino</a>
-                      </div>
-                      <div class="flex vertical layout">
-                        <div>Iscriviti alla nostra newsletter per rimanere aggiornato sui prossimi eventi!</div>
-                        <paper-input id="emailInput"
-                                     label="Email"
-                                     type="email"
-                                     required
-                                     auto-validate
-                                     error-message="Inserisci un indirizzo email valido"
-                                     @keypress="${this.onEmailInputKeypress.bind(this)}">
+                        ${until(this.gdg.then(gdg =>
+                          repeat(gdg.fields.socialLinks, (p: any) => html`
+                            <a href=${p.fields.url} target="_blank"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
+                           `)
+                        ))}</div>
+                          <div class="flex vertical layout">
+                            <div>Iscriviti alla nostra newsletter per rimanere aggiornato sui prossimi eventi!</div>
+                            <paper-input id="emailInput"
+                                         label="Email"
+                                         type="email"
+                                         required
+                                         auto-validate
+                                         error-message="Inserisci un indirizzo email valido"
+                                         @keypress="${this.onEmailInputKeypress.bind(this)}">
                           <paper-icon-button slot="suffix"
                                              icon="arrow-forward"
                                              title="Iscriviti"
