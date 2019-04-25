@@ -7,6 +7,10 @@ import {until} from 'lit-html/directives/until';
 
 import style from './gdg-app.css';
 import sharedStyles from '../../styles/shared-styles.css';
+import basscssGrid from 'basscss-grid/css/grid.css';
+import basscssFlex from 'basscss-flexbox/css/flexbox.css';
+import basscssHide from 'basscss-hide/css/hide.css';
+import basscssLayout from 'basscss-layout/css/layout.css';
 import * as ContentfulService from '../../services/contentful';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
@@ -28,17 +32,20 @@ import '../pages/notfound/page-notfound';
 import '../../styles/theme';
 import {IPageFields} from '../../content-types/generated';
 import {PageData} from '../router-page';
+import {AppDrawerElement} from '@polymer/app-layout/app-drawer/app-drawer';
+import {classMap} from 'lit-html/directives/class-map';
 
 @customElement('gdg-app')
 class GdgApp extends LitElement {
 
-    static styles = [sharedStyles, style];
+    static styles = [sharedStyles, style, basscssGrid, basscssFlex, basscssHide, basscssLayout];
 
     @property() page: string;
     @property() gdg = ContentfulService.getGdg();
     @query('#routerOutlet') routerOutlet;
     @query('#emailInput') emailInput;
     @query('#mailChimpForm') mailChimpForm;
+    @query('app-drawer') drawer: AppDrawerElement;
     pagesData: EntryCollection<IPageFields>;
     router: Router;
 
@@ -67,6 +74,7 @@ class GdgApp extends LitElement {
         ]);
         window.addEventListener('vaadin-router-location-changed', () => {
             this.page = this.router.location.pathname.substr(1);
+            this.drawer.close();
         });
     }
 
@@ -77,18 +85,22 @@ class GdgApp extends LitElement {
             <app-drawer-layout fullbleed force-narrow>
             
               <app-drawer slot="drawer">
-                drawer-content
+                ${repeat(navPages, (page: Entry<IPageFields>) => html`
+                  <a href="/${page.fields.slug || ''}" class=${classMap({active: (page.fields.slug || '') === this.page})}>
+                    ${page.fields.name}
+                  </a>
+                `)}
               </app-drawer>
               
               <app-header-layout fullbleed>
                 <app-header slot="header">
                   <app-toolbar class="container">
-                    <paper-icon-button icon="menu" drawer-toggle class="show-on-narrow"></paper-icon-button>
+                    <paper-icon-button icon="menu" drawer-toggle class="sm-hide md-hide lg-hide"></paper-icon-button>
                     <a href="/"><img class="logo" src="../../assets/images/logo.png"></a>
-                    <div class="flex"></div>
+                    <div class="flex-auto"></div>
                     <paper-tabs .selected=${this.page}
                                 attr-for-selected="name"
-                                class="hide-on-narrow">
+                                class="xs-hide">
                       ${repeat(navPages.filter(p => p.fields.slug), (page: Entry<IPageFields>) => html`
                         <paper-tab link name=${page.fields.slug}><a href="./${page.fields.slug}">${page.fields.name}</a></paper-tab>
                       `)}
@@ -96,50 +108,56 @@ class GdgApp extends LitElement {
                   </app-toolbar>
                 </app-header>
             
-                <div class="vertical layout">
+                <div class="flex flex-column">
                 
                   <div id="routerOutlet"></div>
                   
                   <footer>
-                    <div class="container horizontal layout wrap">
-                      <div class="flex">
+                    <div class="container clearfix">
+                    
+                      <div class="sm-col sm-col-3">
                         <img src="../../assets/images/logo-grey.svg" class="footer-logo">
                       </div>
-                      <div class="flex vertical layout">
+                      
+                      <div class="sm-col sm-col-3 flex flex-column">
                         ${repeat(navPages, (page: Entry<IPageFields>) => html`
                             <a href="/${page.fields.slug || ''}">${page.fields.name}</a>
                         `)}
                       </div>
-                      <div class="flex vertical layout">
+                      
+                      <div class="sm-col sm-col-3 flex flex-column">
                         ${until(this.gdg.then(gdg =>
                           repeat(gdg.fields.socialLinks, (p: any) => html`
                             <a href=${p.fields.url} target="_blank"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
                            `)
-                        ))}</div>
-                          <div class="flex vertical layout">
-                            <div>Iscriviti alla nostra newsletter per rimanere aggiornato sui prossimi eventi!</div>
-                            <paper-input id="emailInput"
-                                         label="Email"
-                                         type="email"
-                                         required
-                                         auto-validate
-                                         error-message="Inserisci un indirizzo email valido"
-                                         @keypress="${this.onEmailInputKeypress.bind(this)}">
-                          <paper-icon-button slot="suffix"
-                                             icon="arrow-forward"
-                                             title="Iscriviti"
-                                             @click="${this.subscribeToNewsletter.bind(this)}">
-                          </paper-icon-button>
+                        ))}
+                      </div>
+                      
+                      <div class="sm-col sm-col-3 flex flex-column">
+                        <div>Iscriviti alla nostra newsletter per rimanere aggiornato sui prossimi eventi!</div>
+                        <paper-input id="emailInput"
+                                     label="Email"
+                                     type="email"
+                                     required
+                                     auto-validate
+                                     error-message="Inserisci un indirizzo email valido"
+                                     @keypress="${this.onEmailInputKeypress.bind(this)}">
+                      <paper-icon-button slot="suffix"
+                                         icon="arrow-forward"
+                                         title="Iscriviti"
+                                         @click="${this.subscribeToNewsletter.bind(this)}">
+                      </paper-icon-button>
                         </paper-input>
                       </div>
+                      
                     </div>
                     <div class="bottom-line">
-                      <div class="container horizontal layout center">
+                      <div class="container sm-flex items-center">
                         <div>
                           Made with <img src="../../assets/images/polymer.svg"> and <img src="../../assets/images/love.svg">
                           by GDG Torino
                         </div>
-                        <div class="flex"></div>
+                        <div class="xs-hide flex-auto"></div>
                         <a href="/privacy-policy">Privacy policy</a>
                         <a href="/termini-di-servizio">Termini di servizio</a>
                       </div>

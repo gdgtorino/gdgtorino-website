@@ -38,14 +38,14 @@ class EventTicket extends LitElement {
             </svg>
             
             <a href="${this.event.url}" target="_blank">
-              <div class="ticket-container horizontal layout">
+              <div class="ticket-container">
                 <div class="cover-image-container">
                   <div class="cover-image">
                     <iron-image sizing="cover" fade src="${this.event.logo.original.url}" alt="Event cover image"></iron-image>
                   </div>
                 </div>
                 
-                <div class="flex vertical layout info">
+                <div class="info">
                   <h3>${this.event.name.text}</h3>
                   <div class="caption">
                     <div>${dateString}</div>
@@ -57,7 +57,7 @@ class EventTicket extends LitElement {
                         <div>${this.event.venue.address.localized_address_display}</div>
                       </div>
                   ` : null}
-                  <div class="flex description">${this.event.description.text}</div>
+                  <div class="description">${this.event.description.text}</div>
                 </div>
               </div>
             </a>

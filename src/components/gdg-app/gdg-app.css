@@ -19,6 +19,14 @@ paper-tab a {
     width: auto;
 }
 
+@media (max-width: 40em) {
+    .logo {
+        height: 40px;
+        width: auto;
+        margin: 4px 0 4px 16px;
+    }
+}
+
 #routerOutlet {
     width: 100%;
 }
@@ -30,6 +38,23 @@ paper-tab a {
     background: white;
 }
 
+app-drawer a:first-of-type {
+    margin-top: 40px;
+}
+
+app-drawer a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    line-height: 40px;
+    padding: 0 24px;
+}
+
+app-drawer a.active {
+    font-weight: bold;
+    background: var(--paper-grey-100);
+}
+
 footer {
     background: var(--paper-grey-100);
     color: #a5a5a5;
@@ -38,6 +63,14 @@ footer {
 footer > .container {
     margin-top: 40px;
     margin-bottom: 40px;
+}
+
+@media (max-width: 40em) {
+    footer .sm-col,
+    footer .bottom-line .container > * {
+        padding: 8px 0;
+        margin: 0;
+    }
 }
 
 footer a {

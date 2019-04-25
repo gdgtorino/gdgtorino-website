@@ -14,6 +14,7 @@ a {
 }
 
 .ticket-container {
+    display: flex;
     border-radius: 4px;
     background: white;
     clip-path: url(#ticketClipPath);
@@ -52,6 +53,10 @@ a {
 }
 
 .info {
+    flex: 1;
+    flex-basis: 0.000000001px;
+    display: flex;
+    flex-direction: column;
     padding: 16px 24px 24px 32px;
     min-width: 0;
 }
@@ -68,6 +73,8 @@ h3 {
 }
 
 .description {
+    flex: 1;
+    flex-basis: 0.000000001px;
     min-height: 0;
     position: relative;
     overflow: hidden;

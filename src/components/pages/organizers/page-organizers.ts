@@ -8,6 +8,9 @@ import * as ContentfulService from '../../../services/contentful';
 import {RouterPage} from '../../router-page';
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-organizers.css';
+import basscssGrid from 'basscss-grid/css/grid.css';
+import basscssFlex from 'basscss-flexbox/css/flexbox.css';
+import basscssLayout from 'basscss-layout/css/layout.css';
 import {IOrganizerFields} from '../../../content-types/generated';
 
 const groupByTeam = (teams: { [key: string]: IOrganizerFields[] }, org: Entry<IOrganizerFields>) => {
@@ -24,7 +27,7 @@ const groupByTeam = (teams: { [key: string]: IOrganizerFields[] }, org: Entry<IO
 @customElement('page-organizers')
 class PageOrganizers extends RouterPage {
 
-    static styles = [style, sharedStyles];
+    static styles = [style, sharedStyles, basscssFlex, basscssGrid, basscssLayout];
 
     teams = ContentfulService.getTeams();
     organizers = ContentfulService.getOrganizers()
@@ -54,11 +57,11 @@ class PageOrganizers extends RouterPage {
                 
                 ${team.team && team.organizers ? html`<h3 class="team-name">${team.team.name}</h3>` : null}
                 
-                <div class="horizontal layout wrap organizers">
+                <div class="flex flex-wrap organizers">
                 
                   ${team.organizers ? repeat(team.organizers, (organizer: any) => html`
 
-                    <div class="organizer">
+                    <div class="organizer col col-3">
                       <div class="organizer-pic"
                            style=${styleMap({
                              backgroundImage: this.profilePicUrl(organizer),

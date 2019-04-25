@@ -2,6 +2,7 @@ import {customElement, html, property} from 'lit-element';
 
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-events.css';
+import basscssFlex from 'basscss-flexbox/css/flexbox.css';
 import * as EventbriteService from '../../../services/eventbrite';
 import {RouterPage} from '../../router-page';
 import '../../event-ticket/event-ticket';
@@ -9,7 +10,7 @@ import '../../event-ticket/event-ticket';
 @customElement('page-events')
 class PageEvents extends RouterPage {
 
-   static styles = [style, sharedStyles];
+   static styles = [style, sharedStyles, basscssFlex];
 
    @property() pastEvents;
    @property() upcomingEvents;
@@ -27,7 +28,7 @@ class PageEvents extends RouterPage {
           <div class="container">
             <h1 class="page-title">Eventi</h1>
             
-            <div class="vertical layout">
+            <div class="flex flex-column">
               
               ${upcomingEvents.length > 0 ?
                     upcomingEvents.map(event => html`
