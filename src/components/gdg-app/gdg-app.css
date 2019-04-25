@@ -30,6 +30,21 @@ paper-tab a {
     background: white;
 }
 
+.drawer-list {
+    padding: 8px;
+    background: var(--app-drawer-background-color);
+}
+.drawer-list > a {
+    text-decoration: none;
+    color: var(--app-drawer-text-color);
+    line-height: 40px;
+    padding: 0 24px;
+}
+
+.drawer-logo{
+    margin: 32px;
+}
+
 footer {
     background: var(--paper-grey-100);
     color: #a5a5a5;

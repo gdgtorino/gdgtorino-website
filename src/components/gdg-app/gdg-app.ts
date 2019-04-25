@@ -39,6 +39,7 @@ class GdgApp extends LitElement {
     @query('#routerOutlet') routerOutlet;
     @query('#emailInput') emailInput;
     @query('#mailChimpForm') mailChimpForm;
+    @query('#appDrawer') appDrawer;
     pagesData: EntryCollection<IPageFields>;
     router: Router;
 
@@ -70,14 +71,18 @@ class GdgApp extends LitElement {
         });
     }
 
+
     render() {
         const navPages: Entry<IPageFields>[] = this.pagesData ? this.pagesData.items
             .filter(page => page.fields.mainNavigationItem) : [];
         return html`
             <app-drawer-layout fullbleed force-narrow>
             
-              <app-drawer slot="drawer">
-                drawer-content
+              <app-drawer slot="drawer" id="appDrawer" no-focus-trap="true" swipe-open>
+               <a href="/"><img class="logo drawer-logo" src="../../assets/images/logo.png"></a>
+                 ${repeat(navPages.filter(p => p.fields.slug), (page: Entry<IPageFields>) => html`
+                   <nav class="drawer-list" on-click=${this.appDrawer.close()}><a href="./${page.fields.slug}">${page.fields.name}</a></nav>
+                  `)}
               </app-drawer>
               
               <app-header-layout fullbleed>
@@ -112,10 +117,10 @@ class GdgApp extends LitElement {
                       </div>
                       <div class="flex vertical layout">
                         ${until(this.gdg.then(gdg =>
-                          repeat(gdg.fields.socialLinks, (p: any) => html`
+            repeat(gdg.fields.socialLinks, (p: any) => html`
                             <a href=${p.fields.url} target="_blank"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
                            `)
-                        ))}</div>
+        ))}</div>
                           <div class="flex vertical layout">
                             <div>Iscriviti alla nostra newsletter per rimanere aggiornato sui prossimi eventi!</div>
                             <paper-input id="emailInput"
