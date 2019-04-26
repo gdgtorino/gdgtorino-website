@@ -78,6 +78,7 @@ class GdgApp extends LitElement {
         });
     }
 
+
     render() {
         const navPages: Entry<IPageFields>[] = this.pagesData ? this.pagesData.items
             .filter(page => page.fields.mainNavigationItem) : [];
@@ -129,7 +130,7 @@ class GdgApp extends LitElement {
                         ${until(this.gdg.then(gdg =>
                           repeat(gdg.fields.socialLinks, (p: any) => html`
                             <a href=${p.fields.url} target="_blank"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
-                           `)
+                          `)
                         ))}
                       </div>
                       
