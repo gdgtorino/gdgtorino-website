@@ -17,6 +17,8 @@ a {
     display: flex;
     border-radius: 4px;
     background: white;
+    -webkit-clip-path: url(#ticketClipPath);
+    -moz-clip-path: url(#ticketClipPath);
     clip-path: url(#ticketClipPath);
 }
 
