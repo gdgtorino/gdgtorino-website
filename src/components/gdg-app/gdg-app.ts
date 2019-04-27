@@ -159,8 +159,7 @@ class GdgApp extends LitElement {
                           by GDG Torino
                         </div>
                         <div class="xs-hide flex-auto"></div>
-                        <a href="/privacy-policy">Privacy policy</a>
-                        <a href="/termini-di-servizio">Termini di servizio</a>
+                        <div>© 2019 GDG Torino</div>
                       </div>
                     </div>
                   </footer>
