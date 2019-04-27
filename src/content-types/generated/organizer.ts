@@ -6,7 +6,7 @@ import { ITeam, Team } from "./team";
 export interface IOrganizerFields {
   name?: string;
   inTeam?: ILink<'Entry'> | ITeam;
-  level: OrganizerLevel;
+  level?: OrganizerLevel;
   role?: string;
   profilePicture?: ILink<'Asset'> | IAsset;
   socialLinks?: Array<ILink<'Entry'> | ISocialLink>;
@@ -48,7 +48,7 @@ export class Organizer extends Entry<IOrganizerFields> implements IOrganizer {
       (isEntry(this.fields.inTeam) ? wrap<'team'>(this.fields.inTeam) : null)
   }
 
-  get level(): OrganizerLevel {
+  get level(): OrganizerLevel | undefined {
     return this.fields.level
   }
 

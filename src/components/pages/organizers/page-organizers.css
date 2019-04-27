@@ -29,3 +29,11 @@
 .organizers {
     padding: 36px 0 20px 0;
 }
+
+.social-links {
+    padding: 8px 0;
+}
+
+.social-links > * {
+    margin: 0 4px;
+}

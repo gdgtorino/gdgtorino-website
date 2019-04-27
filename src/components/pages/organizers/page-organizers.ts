@@ -72,6 +72,16 @@ class PageOrganizers extends RouterPage {
                        
                        ${organizer.role ? html`<div>${organizer.role}</div>` : null}
                        
+                       ${organizer.socialLinks ? html`
+                         <div class="social-links">
+                           
+                           ${repeat(organizer.socialLinks, (link: any) => html`
+                             <a href=${link.fields.url} target="_blank"><img src=${link.fields.icon.fields.file.url}></a>
+                           `)}
+                           
+                         </div>
+                       ` : null}
+                       
                     </div>
                     
                   `) : null}

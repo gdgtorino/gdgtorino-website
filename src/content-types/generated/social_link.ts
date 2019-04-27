@@ -1,6 +1,7 @@
 import { Asset, Entry, IAsset, IEntry, ILink, isAsset, ISys } from "../base";
 
 export interface ISocialLinkFields {
+  description?: string;
   text?: string;
   url: string;
   icon: ILink<'Asset'> | IAsset;
@@ -23,6 +24,10 @@ export function isSocialLink(entry: IEntry<any>): entry is ISocialLink {
 export class SocialLink extends Entry<ISocialLinkFields> implements ISocialLink {
   public readonly sys!: ISys<'Entry'>;
   public readonly fields!: ISocialLinkFields;
+
+  get description(): string | undefined {
+    return this.fields.description
+  }
 
   get text(): string | undefined {
     return this.fields.text
