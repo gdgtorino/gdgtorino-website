@@ -14,6 +14,7 @@ import basscssLayout from 'basscss-layout/css/layout.css';
 import * as ContentfulService from '../../services/contentful';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
+import '@polymer/app-layout/app-scroll-effects/app-scroll-effects';
 import '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
@@ -94,14 +95,14 @@ class GdgApp extends LitElement {
               </app-drawer>
               
               <app-header-layout fullbleed>
-                <app-header slot="header">
+                <app-header slot="header" condenses reveals effects="waterfall">
                   <app-toolbar class="container">
                     <paper-icon-button icon="menu" drawer-toggle class="sm-hide md-hide lg-hide"></paper-icon-button>
                     <a href="/"><img class="logo" src="../../assets/images/logo.png"></a>
                     <div class="flex-auto"></div>
                     <paper-tabs .selected=${this.page}
                                 attr-for-selected="name"
-                                class="xs-hide">
+                                class="xs-hide self-end">
                       ${repeat(navPages.filter(p => p.fields.slug), (page: Entry<IPageFields>) => html`
                         <paper-tab link name=${page.fields.slug}><a href="./${page.fields.slug}">${page.fields.name}</a></paper-tab>
                       `)}
@@ -171,7 +172,7 @@ class GdgApp extends LitElement {
             </app-drawer-layout>
             
             ${this.page == null ? html`
-              <div class="loading-overlay horizontal layout center-center">
+              <div class="loading-overlay flex items-center justify-center">
                 <paper-spinner-lite active></paper-spinner-lite>
               </div>` : null}
             
