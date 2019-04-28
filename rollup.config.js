@@ -75,7 +75,12 @@ export default {
             host: 'localhost',
             root: 'dist',
             file: 'index.html',
-            mount: [['/dist', './dist'], ['/node_modules', './node_modules'], ['/assets', './assets']],
+            mount: [
+                ['/dist', './dist'],
+                ['/node_modules', './node_modules'],
+                ['/assets', './assets'],
+                ['/manifest.json', './manifest.json'],
+            ],
             open: false,
             wait: 200,
         }),
