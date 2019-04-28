@@ -9,3 +9,7 @@ event-ticket {
     color: var(--paper-grey-500);
     margin: 40px 0;
 }
+
+.container{
+    min-height: 100vh;
+}
