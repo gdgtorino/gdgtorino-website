@@ -6,6 +6,10 @@ app-toolbar {
     height: 56px;
 }
 
+paper-tabs {
+    height: 100%;
+}
+
 paper-tab {
     padding: 0 16px;
 }
@@ -98,7 +102,7 @@ footer .bottom-line {
 }
 
 footer .bottom-line img {
-    height: 13px;
+    height: 12px;
     width: auto;
 }
 

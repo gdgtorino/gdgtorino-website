@@ -102,7 +102,7 @@ class GdgApp extends LitElement {
                     <div class="flex-auto"></div>
                     <paper-tabs .selected=${this.page}
                                 attr-for-selected="name"
-                                class="xs-hide self-end">
+                                class="xs-hide">
                       ${repeat(navPages.filter(p => p.fields.slug), (page: Entry<IPageFields>) => html`
                         <paper-tab link name=${page.fields.slug}><a href="./${page.fields.slug}">${page.fields.name}</a></paper-tab>
                       `)}
