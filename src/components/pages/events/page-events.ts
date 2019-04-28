@@ -6,14 +6,15 @@ import basscssFlex from 'basscss-flexbox/css/flexbox.css';
 import * as EventbriteService from '../../../services/eventbrite';
 import {RouterPage} from '../../router-page';
 import '../../event-ticket/event-ticket';
+import {until} from "lit-html/directives/until";
 
 @customElement('page-events')
 class PageEvents extends RouterPage {
 
-   static styles = [style, sharedStyles, basscssFlex];
+    static styles = [style, sharedStyles, basscssFlex];
 
-   @property() pastEvents;
-   @property() upcomingEvents;
+    @property() pastEvents;
+    @property() upcomingEvents;
 
     async firstUpdated() {
         this.pastEvents = await EventbriteService.getPastEvents();
@@ -25,26 +26,29 @@ class PageEvents extends RouterPage {
         const upcomingEvents = this.upcomingEvents ? (<any>this.upcomingEvents).events : [];
 
         return html`
-          <div class="container">
+         <div class="container">
             <h1 class="page-title">Eventi</h1>
             
             <div class="flex flex-column">
-              
+            ${until(this.firstUpdated().then( () => html`
               ${upcomingEvents.length > 0 ?
-                    upcomingEvents.map(event => html`
-                      <event-ticket .event=${event}></event-ticket>
-                    `) : html`
+                upcomingEvents.map(event => html`
+                  <event-ticket .event=${event}></event-ticket>
+                  `) : html`
                       <div class="head">Al momento non abbiamo eventi in programma. Stay tuned!</div>
-                    `}
-              
+                `}
               <h3>Eventi passati</h3>
               
               ${pastEvents.map(event => html`
                 <event-ticket .event=${event}></event-ticket>
               `)}
-            </div>
-          </div>
-        `;
+            
+          
+            `), html`<div class="loading-overlays flex items-center justify-center">
+                <paper-spinner-lite active></paper-spinner-lite>
+              </div>`)}
+              </div>
+</div>`
     }
 
 }
