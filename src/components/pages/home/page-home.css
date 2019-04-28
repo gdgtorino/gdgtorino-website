@@ -26,6 +26,7 @@
 @media (min-width: 888px) {
     .intro {
         display: block;
+        padding: 80px 0;
     }
 
     .abstract {
@@ -37,7 +38,7 @@
         width: 80%;
         height: auto;
         float: right;
-        shape-outside: polygon(100% 0%, 100% 100%, 0% 100%, 0% 50%, 50% 13%);
+        shape-outside: polygon(100% 0%, 100% 100%, 0% 100%, 0% 50%, 50% 0%);
     }
 }
 

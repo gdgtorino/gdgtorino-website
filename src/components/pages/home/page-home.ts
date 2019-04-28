@@ -24,7 +24,7 @@ class PageHome extends RouterPage {
         return html`
           <div class="container">
             <section class="intro">
-              <img src="../../../assets/images/group-photo.png" class="group-photo">
+              <img src="../../../assets/images/group-photo.jpg" class="group-photo">
               
               <h2 class="abstract">
                 ${until(this.gdg.then(gdg => gdg.fields.abstract))}
