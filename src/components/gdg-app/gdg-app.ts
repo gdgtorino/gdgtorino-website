@@ -130,7 +130,7 @@ class GdgApp extends LitElement {
                       <div class="sm-col sm-col-3 flex flex-column">
                         ${until(this.gdg.then(gdg =>
                           repeat(gdg.fields.socialLinks, (p: any) => html`
-                            <a href=${p.fields.url} target="_blank"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
+                            <a href=${p.fields.url} target="_blank" rel="noopener"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
                           `)
                         ))}
                       </div>

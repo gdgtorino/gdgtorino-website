@@ -76,7 +76,7 @@ class PageOrganizers extends RouterPage {
                          <div class="social-links">
                            
                            ${repeat(organizer.socialLinks, (link: any) => html`
-                             <a href=${link.fields.url} target="_blank"><img src=${link.fields.icon.fields.file.url}></a>
+                             <a href=${link.fields.url} target="_blank" rel="noopener"><img src=${link.fields.icon.fields.file.url}></a>
                            `)}
                            
                          </div>

@@ -40,7 +40,7 @@ class EventTicket extends LitElement {
                 </defs>
             </svg>
             
-            <a href="${this.event.url}" target="_blank">
+            <a href="${this.event.url}" target="_blank" rel="noopener">
               <div class="ticket-container">
                 <div class="cover-image-container">
                   <div class="cover-image">
