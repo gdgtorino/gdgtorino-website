@@ -54,13 +54,17 @@ app-drawer a {
     display: block;
     text-decoration: none;
     color: inherit;
-    line-height: 40px;
+    line-height: 46px;
     padding: 0 24px;
+    margin-right: 16px;
 }
 
 app-drawer a.active {
     font-weight: bold;
-    background: var(--paper-grey-100);
+    color: var(--primary-color);
+    background: #e7f0fe;
+    border-top-right-radius: 23px;
+    border-bottom-right-radius: 23px;
 }
 
 footer {
