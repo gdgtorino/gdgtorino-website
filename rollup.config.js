@@ -68,7 +68,7 @@ export default {
         }),
         inProd && workbox({
             mode: 'generateSW',
-            options: require('./workbox-config'),
+            options: require('./workbox.config'),
         }),
         !inProd && liveServer({
             port: 8200,
