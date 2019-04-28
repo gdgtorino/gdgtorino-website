@@ -8,6 +8,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import litcss from 'rollup-plugin-lit-css';
 import cpy from 'rollup-plugin-cpy';
+import workbox from 'rollup-plugin-workbox-build';
 import liveServer from 'rollup-plugin-live-server';
 import {terser} from 'rollup-plugin-terser';
 
@@ -64,6 +65,10 @@ export default {
             options: {
                 parents: true,
             },
+        }),
+        inProd && workbox({
+            mode: 'generateSW',
+            options: require('./workbox-config'),
         }),
         !inProd && liveServer({
             port: 8200,
