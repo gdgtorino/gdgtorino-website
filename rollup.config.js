@@ -60,7 +60,7 @@ export default {
         typescript(),
         inProd && terser(),
         inProd && cpy({
-            files: 'assets/**/*',
+            files: ['assets/**/*', 'manifest.json'],
             dest: 'dist/',
             options: {
                 parents: true,
