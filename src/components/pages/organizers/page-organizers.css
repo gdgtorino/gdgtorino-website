@@ -37,3 +37,8 @@
 .social-links > * {
     margin: 0 4px;
 }
+
+.social-links img {
+    height: 13px;
+    width: auto;
+}

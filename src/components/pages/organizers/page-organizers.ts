@@ -62,7 +62,7 @@ class PageOrganizers extends RouterPage {
                 
                   ${team.organizers ? repeat(team.organizers, (organizer: any) => html`
 
-                    <div class="organizer sm-col sm-col-6 md-col-4 lg-col-3 mx-auto">
+                    <div class="organizer sm-col sm-col-6 md-col-4 lg-col-3">
                       <div class="organizer-pic"
                            style=${styleMap({
                              backgroundImage: this.profilePicUrl(organizer),
