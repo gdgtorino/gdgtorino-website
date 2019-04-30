@@ -54,11 +54,9 @@ class PageOrganizers extends RouterPage {
             <h1 class="page-title">${this.pageData.name}</h1>
             <div class="page-content">
               
+              <div class="clearfix organizers">
+              
               ${until(this.orgsByTeam.then(teams => repeat(teams, team => html`
-                
-                ${team.team && team.organizers ? html`<h3 class="team-name">${team.team.name}</h3>` : null}
-                
-                <div class="clearfix organizers">
                 
                   ${team.organizers ? repeat(team.organizers, (organizer: any) => html`
 
@@ -86,9 +84,9 @@ class PageOrganizers extends RouterPage {
                     
                   `) : null}
                 
-                </div>
-                
               `)))}
+              
+              </div>
               
             </div>
           </div>
