@@ -1,3 +1,5 @@
+require('dotenv').config();
+import replace from "rollup-plugin-replace";
 import nodeResolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import builtins from 'rollup-plugin-node-builtins';
@@ -14,6 +16,11 @@ import {terser} from 'rollup-plugin-terser';
 
 const inProd = process.env.BUILD === 'production';
 
+const mapEnvVars = vars => vars.reduce((res, envVar) => {
+    res[envVar] = process.env[envVar];
+    return res;
+}, {});
+
 export default {
     input: './index.html',
     treeshake: inProd,
@@ -23,6 +30,13 @@ export default {
         sourcemap: true,
     },
     plugins: [
+        replace(mapEnvVars([
+            'CONTENTFUL_SPACE',
+            'CONTENTFUL_ACCESS_TOKEN',
+            'CONTENTFUL_MANAGEMENT_TOKEN',
+            'EVENTBRITE_ORG_ID',
+            'EVENTBRITE_TOKEN',
+        ])),
         inProd && minifyHTML({
             failOnError: true,
         }),

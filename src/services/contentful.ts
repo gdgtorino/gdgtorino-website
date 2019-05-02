@@ -7,9 +7,12 @@ import {
     IPageFields,
     IPartnerFields, ITeamFields,
 } from '../content-types/generated';
-import * as configuration from '../../config.json';
 
-const contentfulClient: ContentfulClientApi = createClient(configuration.contentful);
+const contentfulClient: ContentfulClientApi = createClient(<any>{
+    space: 'CONTENTFUL_SPACE',
+    accessToken: 'CONTENTFUL_ACCESS_TOKEN',
+    managementToken: 'CONTENTFUL_MANAGEMENT_TOKEN',
+});
 
 export const getRoutingData = (): Promise<EntryCollection<IPageFields>> => {
     return contentfulClient.getEntries<IPageFields>({

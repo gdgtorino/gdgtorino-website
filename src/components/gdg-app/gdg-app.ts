@@ -65,6 +65,9 @@ class GdgApp extends LitElement {
                             return ContentfulService.getPageBody(p.sys.id);
                         },
                     };
+                    const pageName = component.pageData.name;
+                    const pageSlug = component.pageData.slug;
+                    document.title = pageSlug ? `${pageName} | GDG Torino` : 'GDG Torino';
                     return component;
                 },
             })),
@@ -86,7 +89,7 @@ class GdgApp extends LitElement {
         return html`
             <app-drawer-layout fullbleed force-narrow>
             
-              <app-drawer slot="drawer">
+              <app-drawer slot="drawer" swipe-open>
                 ${repeat(navPages, (page: Entry<IPageFields>) => html`
                   <a href="/${page.fields.slug || ''}" class=${classMap({active: (page.fields.slug || '') === this.page})}>
                     ${page.fields.name}

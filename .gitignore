@@ -309,8 +309,5 @@ dist
 # Rollup typescript plugin cache
 .rpt2_cache
 
-# Configuration
-config.json
-
 # Contentful schema
 contentful-schema.json

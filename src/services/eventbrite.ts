@@ -1,7 +1,7 @@
-import * as configuration from '../../config.json';
-
 const baseUrl = 'https://www.eventbriteapi.com/v3/';
-const {organizationId, token} = configuration.eventbrite;
+const organizationId = 'EVENTBRITE_ORG_ID';
+const token = 'EVENTBRITE_TOKEN';
+
 const fetchJson = (input: RequestInfo, init?: RequestInit) => fetch(input, init)
     .then(r => r.json());
 const cache: Map<string, any> = new Map();

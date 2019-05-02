@@ -57,6 +57,7 @@ app-drawer a {
     line-height: 46px;
     padding: 0 24px;
     margin-right: 16px;
+    outline: none;
 }
 
 app-drawer a.active {
