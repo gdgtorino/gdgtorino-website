@@ -32,7 +32,7 @@ import '../pages/organizers/page-organizers';
 import '../pages/generic/page-generic';
 import '../pages/notfound/page-notfound';
 import '../../styles/theme';
-import {IPageFields} from '../../content-types/generated';
+import {IGdgFields, IPageFields} from '../../content-types/generated';
 import {PageData} from '../router-page';
 import {AppDrawerElement} from '@polymer/app-layout/app-drawer/app-drawer';
 import {classMap} from 'lit-html/directives/class-map';
@@ -43,16 +43,18 @@ class GdgApp extends LitElement {
     static styles = [sharedStyles, style, basscssGrid, basscssFlex, basscssHide, basscssLayout];
 
     @property() page: string;
-    @property() gdg = ContentfulService.getGdg();
+    @property() gdg: Entry<IGdgFields>;
     @query('#routerOutlet') routerOutlet;
     @query('#emailInput') emailInput;
     @query('#mailChimpForm') mailChimpForm;
     @query('app-drawer') drawer: AppDrawerElement;
     pagesData: EntryCollection<IPageFields>;
+    gdgName = '';
     router: Router;
 
     async firstUpdated() {
         this.pagesData = await ContentfulService.getRoutingData();
+        this.gdg = await ContentfulService.getGdg();
         this.router = new Router(this.routerOutlet);
         this.router.setRoutes([
             ...this.pagesData.items.map(p => ({
@@ -69,8 +71,9 @@ class GdgApp extends LitElement {
                     const pageName = component.pageData.name;
                     const pageSlug = component.pageData.slug;
                     const pageImage = component.pageData.image;
+                    this.gdgName = `GDG ${this.gdg.fields.location}`;
                     headful({
-                        title: pageSlug ? `${pageName} | GDG Torino` : 'GDG Torino',
+                        title: pageSlug ? `${pageName} | ${this.gdgName}` : this.gdgName,
                         description: component.pageData.description,
                         image: pageImage ? pageImage.fields.file.fields.url : '',
                     });
@@ -137,11 +140,9 @@ class GdgApp extends LitElement {
                       </div>
                       
                       <div class="sm-col sm-col-3 flex flex-column">
-                        ${until(this.gdg.then(gdg =>
-                          repeat(gdg.fields.socialLinks, (p: any) => html`
+                        ${this.gdg ? repeat(this.gdg.fields.socialLinks, (p: any) => html`
                             <a href=${p.fields.url} target="_blank" rel="noopener"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
-                          `)
-                        ))}
+                          `) : null}
                       </div>
                       
                       <div class="sm-col sm-col-3 flex flex-column">
@@ -169,7 +170,7 @@ class GdgApp extends LitElement {
                           by GDG Torino
                         </div>
                         <div class="xs-hide flex-auto"></div>
-                        <div>© 2019 GDG Torino</div>
+                        <div>© ${new Date().getFullYear()} ${this.gdgName}</div>
                       </div>
                     </div>
                   </footer>
