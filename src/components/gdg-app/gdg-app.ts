@@ -1,9 +1,10 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
+import {until} from 'lit-html/directives/until';
 import {Entry, EntryCollection} from 'contentful';
 import {Document} from '@contentful/rich-text-types';
 import {Router} from '@vaadin/router';
-import {until} from 'lit-html/directives/until';
+import headful from 'headful';
 
 import style from './gdg-app.css';
 import sharedStyles from '../../styles/shared-styles.css';
@@ -67,7 +68,12 @@ class GdgApp extends LitElement {
                     };
                     const pageName = component.pageData.name;
                     const pageSlug = component.pageData.slug;
-                    document.title = pageSlug ? `${pageName} | GDG Torino` : 'GDG Torino';
+                    const pageImage = component.pageData.image;
+                    headful({
+                        title: pageSlug ? `${pageName} | GDG Torino` : 'GDG Torino',
+                        description: component.pageData.description,
+                        image: pageImage ? pageImage.fields.file.fields.url : '',
+                    });
                     return component;
                 },
             })),

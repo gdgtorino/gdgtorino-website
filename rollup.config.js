@@ -31,7 +31,7 @@ export default {
     },
     plugins: [
         replace(mapEnvVars([
-            'CONTENTFUL_SPACE',
+            'CONTENTFUL_SPACE_ID',
             'CONTENTFUL_ACCESS_TOKEN',
             'CONTENTFUL_MANAGEMENT_TOKEN',
             'EVENTBRITE_ORG_ID',

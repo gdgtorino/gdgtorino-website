@@ -1,12 +1,14 @@
-import { Entry, IEntry, ISys } from "../base";
+import { Asset, Entry, IAsset, IEntry, ILink, isAsset, ISys } from "../base";
 
 export interface IPageFields {
   name: string;
+  description?: string;
   slug?: string;
   component?: string;
   body?: any;
   mainNavigationItem?: boolean;
   order?: number;
+  image?: ILink<'Asset'> | IAsset;
 }
 
 /**
@@ -31,6 +33,10 @@ export class Page extends Entry<IPageFields> implements IPage {
     return this.fields.name
   }
 
+  get description(): string | undefined {
+    return this.fields.description
+  }
+
   get slug(): string | undefined {
     return this.fields.slug
   }
@@ -53,6 +59,11 @@ export class Page extends Entry<IPageFields> implements IPage {
 
   get order(): number | undefined {
     return this.fields.order
+  }
+
+  get image(): Asset | null | undefined {
+    return !this.fields.image ? undefined :
+      (isAsset(this.fields.image) ? new Asset(this.fields.image) : null)
   }
 
   constructor(entry: IPage);

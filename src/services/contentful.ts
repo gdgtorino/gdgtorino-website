@@ -9,7 +9,7 @@ import {
 } from '../content-types/generated';
 
 const contentfulClient: ContentfulClientApi = createClient(<any>{
-    space: 'CONTENTFUL_SPACE',
+    space: 'CONTENTFUL_SPACE_ID',
     accessToken: 'CONTENTFUL_ACCESS_TOKEN',
     managementToken: 'CONTENTFUL_MANAGEMENT_TOKEN',
 });
@@ -31,7 +31,10 @@ export const getPageBody = (id: string): Promise<Document> => {
 };
 
 export const getGdg = (): Promise<Entry<IGdgFields>> => {
-    return contentfulClient.getEntry<IGdgFields>('11pVnPX4AKqcCIAyyYwqI6');
+    return contentfulClient.getEntries<IGdgFields>({
+        'content_type': 'gdg',
+        limit: 1,
+    }).then(gdgs => gdgs.items ? gdgs.items[0] : null);
 };
 
 export const getPartners = (): Promise<EntryCollection<IPartnerFields>> => {
