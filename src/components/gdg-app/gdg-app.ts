@@ -25,15 +25,9 @@ import '@polymer/paper-input/paper-input';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
 import '@polymer/paper-spinner/paper-spinner-lite';
-import '../pages/home/page-home';
-import '../pages/about/page-about';
-import '../pages/events/page-events';
-import '../pages/organizers/page-organizers';
-import '../pages/generic/page-generic';
-import '../pages/notfound/page-notfound';
 import '../../styles/theme';
 import {IGdgFields, IPageFields} from '../../content-types/generated';
-import {PageData} from '../router-page';
+import {PageData} from '../pages/router-page';
 import {AppDrawerElement} from '@polymer/app-layout/app-drawer/app-drawer';
 import {classMap} from 'lit-html/directives/class-map';
 
@@ -61,7 +55,9 @@ class GdgApp extends LitElement {
                 path: `/${p.fields.slug || ''}`,
                 component: p.fields.component || 'page-generic',
                 action: (context, commands) => {
-                    const component = commands.component(context.route.component);
+                    const componentName = context.route.component;
+                    import('../pages');
+                    const component = commands.component(componentName);
                     component.pageData = <PageData>{
                         ...p.fields,
                         getBody(): Promise<Document> {

@@ -6,7 +6,7 @@ import style from './page-home.css';
 import basscssFlex from 'basscss-flexbox/css/flexbox.css';
 import * as ContentfulService from '../../../services/contentful';
 import * as EventbriteService from '../../../services/eventbrite';
-import {RouterPage} from '../../router-page';
+import {RouterPage} from '../router-page';
 import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icon/iron-icon';
 import '../../event-ticket/event-ticket';

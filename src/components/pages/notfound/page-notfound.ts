@@ -1,5 +1,5 @@
 import {customElement, html} from 'lit-element';
-import {RouterPage} from '../../router-page';
+import {RouterPage} from '../router-page';
 
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-notfound.css';

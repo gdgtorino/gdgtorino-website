@@ -1,5 +1,5 @@
 import {LitElement} from 'lit-element';
-import {IPageFields} from '../content-types/generated';
+import {IPageFields} from '../../content-types/generated';
 import {Document} from '@contentful/rich-text-types';
 
 export interface Location {

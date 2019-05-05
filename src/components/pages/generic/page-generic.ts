@@ -4,7 +4,7 @@ import {until} from 'lit-html/directives/until';
 import {documentToHtmlString} from '@contentful/rich-text-html-renderer';
 import {Document} from '@contentful/rich-text-types';
 
-import {RouterPage} from '../../router-page';
+import {RouterPage} from '../router-page';
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-generic.css';
 

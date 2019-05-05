@@ -4,7 +4,7 @@ import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-events.css';
 import basscssFlex from 'basscss-flexbox/css/flexbox.css';
 import * as EventbriteService from '../../../services/eventbrite';
-import {RouterPage} from '../../router-page';
+import {RouterPage} from '../router-page';
 import '../../event-ticket/event-ticket';
 import {until} from "lit-html/directives/until";
 import {repeat} from 'lit-html/directives/repeat';

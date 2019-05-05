@@ -6,7 +6,7 @@ import {documentToHtmlString} from '@contentful/rich-text-html-renderer';
 
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-about.css';
-import {RouterPage} from '../../router-page';
+import {RouterPage} from '../router-page';
 
 @customElement('page-about')
 class PageAbout extends RouterPage {

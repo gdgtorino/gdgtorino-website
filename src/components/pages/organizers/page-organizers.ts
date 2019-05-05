@@ -5,7 +5,7 @@ import {until} from 'lit-html/directives/until';
 import {Entry} from 'contentful';
 
 import * as ContentfulService from '../../../services/contentful';
-import {RouterPage} from '../../router-page';
+import {RouterPage} from '../router-page';
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-organizers.css';
 import basscssGrid from 'basscss-grid/css/grid.css';
