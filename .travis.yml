@@ -9,6 +9,7 @@ deploy:
   on:
     branch: master
   token: $FIREBASE_TOKEN
+  project: gdg-torino-website
 
 branches:
   only:
