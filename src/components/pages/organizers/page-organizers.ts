@@ -13,6 +13,7 @@ import basscssFlex from 'basscss-flexbox/css/flexbox.css';
 import basscssLayout from 'basscss-layout/css/layout.css';
 import basscssMargin from 'basscss-margin/css/margin.css';
 import {IOrganizerFields} from '../../../content-types/generated';
+import {renderErrorView} from '../../error-view/error-view';
 
 const groupByTeam = (teams: { [key: string]: IOrganizerFields[] }, org: Entry<IOrganizerFields>) => {
     const teamId = org.fields.inTeam &&
@@ -84,7 +85,7 @@ class PageOrganizers extends RouterPage {
                     
                   `) : null}
                 
-              `)))}
+              `)).catch(renderErrorView))}
               
               </div>
               

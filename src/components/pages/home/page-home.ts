@@ -11,6 +11,7 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icon/iron-icon';
 import '../../event-ticket/event-ticket';
 import {repeat} from 'lit-html/directives/repeat';
+import {renderErrorView} from '../../error-view/error-view';
 
 @customElement('page-home')
 class PageHome extends RouterPage {
@@ -27,7 +28,7 @@ class PageHome extends RouterPage {
               <img src="../../../assets/images/group-photo.jpg" class="group-photo">
               
               <h2 class="abstract">
-                ${until(this.gdg.then(gdg => gdg.fields.abstract))}
+                ${until(this.gdg.then(gdg => gdg.fields.abstract).catch(renderErrorView))}
               </h2>
             </section>
           </div>
@@ -40,7 +41,7 @@ class PageHome extends RouterPage {
               </div>
               ${until(this.highlightedEvents.then(events => repeat(events, event => html`
                 <event-ticket .event=${event}></event-ticket>
-              `)))}
+              `)).catch(renderErrorView))}
             </div>
           </section>
           
@@ -52,7 +53,7 @@ class PageHome extends RouterPage {
                   repeat(partners.items, (p: any) => html`
                     <img class="partner-logo" src=${p.fields.logo.fields.file.url} alt=${p.fields.name + ' logo'}>
                   `)
-                ))}
+                ).catch(renderErrorView))}
               </div>
             </section>
           </div>

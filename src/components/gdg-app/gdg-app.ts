@@ -177,7 +177,7 @@ class GdgApp extends LitElement {
               
             </app-drawer-layout>
             
-            ${this.page == null ? html`
+            ${this.page == null || this.pagesData == null ? html`
               <div class="loading-overlay flex items-center justify-center">
                 <paper-spinner-lite active></paper-spinner-lite>
               </div>` : null}

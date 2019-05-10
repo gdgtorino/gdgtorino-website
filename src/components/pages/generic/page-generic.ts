@@ -7,6 +7,7 @@ import {Document} from '@contentful/rich-text-types';
 import {RouterPage} from '../router-page';
 import sharedStyles from '../../../styles/shared-styles.css';
 import style from './page-generic.css';
+import {renderErrorView} from '../../error-view/error-view';
 
 @customElement('page-generic')
 class PageGeneric extends RouterPage {
@@ -27,7 +28,7 @@ class PageGeneric extends RouterPage {
             <div class="page-content">
               ${until(this.body.then(body =>
                   unsafeHTML(documentToHtmlString(body))
-              ))}
+              ).catch(renderErrorView))}
             </div>
           </div>
         `;

@@ -8,6 +8,7 @@ import {RouterPage} from '../router-page';
 import '../../event-ticket/event-ticket';
 import {until} from "lit-html/directives/until";
 import {repeat} from 'lit-html/directives/repeat';
+import {renderErrorView} from '../../error-view/error-view';
 
 @customElement('page-events')
 class PageEvents extends RouterPage {
@@ -49,7 +50,7 @@ class PageEvents extends RouterPage {
                     <event-ticket .event=${event}></event-ticket>
                   `)}
               
-                `), html`
+                `).catch(renderErrorView), html`
                 
                   <div class="loading-layout flex items-center justify-center">
                     <paper-spinner-lite active></paper-spinner-lite>
