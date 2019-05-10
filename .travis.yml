@@ -7,7 +7,7 @@ before_deploy:
 deploy:
   provider: firebase
   on:
-    branch: feature/6-travisci
+    branch: master
   token: $FIREBASE_TOKEN
 
 branches:
