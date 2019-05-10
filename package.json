@@ -9,7 +9,7 @@
     "build:prod": "rm -rf dist/ && rollup -c --environment BUILD:production",
     "build:ctypes": "node build-contentful-types.js",
     "start": "npm run build:w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\""
   },
   "repository": {
     "type": "git",

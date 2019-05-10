@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - node
+
+before_deploy:
+  - npm run build:prod
+deploy:
+  provider: firebase
+  on:
+    branch: master
+  token: $FIREBASE_TOKEN
+
+branches:
+  only:
+    - master
+
