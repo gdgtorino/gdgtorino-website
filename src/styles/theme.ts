@@ -37,6 +37,8 @@ $_documentContainer.innerHTML = `<custom-style>
        */
       --paper-tabs-selection-bar-color: var(--primary-color);
       --paper-tab-ink: var(--primary-color);
+      
+      color: var(--secondary-text-color);
     }
   </style>
 </custom-style>`;

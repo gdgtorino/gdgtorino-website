@@ -4,9 +4,39 @@
   <meta charset="UTF-8">
   <title>GDG Torino</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
-  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   <link rel="icon" href="assets/images/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="msapplication-starturl" content="/">
+  <meta name="theme-color" content="#4285f4" />
+  <link rel="icon" sizes="512x512" href="assets/icons/icon-512x512.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="assets/icons/icon-512x512.png">
+  <link rel="icon" sizes="384x384" href="assets/icons/icon-384x384.png">
+  <link rel="apple-touch-icon" sizes="384x384" href="assets/icons/icon-384x384.png">
+  <link rel="icon" sizes="192x192" href="assets/icons/icon-192x192.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/icons/icon-192x192.png">
+  <link rel="icon" sizes="152x152" href="assets/icons/icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/icons/icon-152x152.png">
+  <link rel="icon" sizes="144x144" href="assets/icons/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="assets/icons/icon-144x144.png">
+  <link rel="icon" sizes="128x128" href="assets/icons/icon-128x128.png">
+  <link rel="apple-touch-icon" sizes="128x128" href="assets/icons/icon-128x128.png">
+  <link rel="icon" sizes="96x96" href="assets/icons/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="assets/icons/icon-96x96.png">
+  <link rel="icon" sizes="72x72" href="assets/icons/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/icons/icon-72x72.png">
+  <meta itemprop="name">
+  <meta property="og:title">
+  <meta name="twitter:title">
+  <meta name="description">
+  <meta itemprop="description">
+  <meta property="og:description">
+  <meta name="twitter:description">
+  <meta itemprop="image">
+  <meta property="og:image">
+  <meta name="twitter:image">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500" rel="stylesheet">
   <style>
     html, body {
       width: 100%;
@@ -16,12 +46,25 @@
       font-size: 0.98rem;
     }
   </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139118913-1"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-139118913-1');
+
+      if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+              navigator.serviceWorker.register('./service-worker.js');
+          });
+      }
+  </script>
 </head>
 <body>
 <gdg-app></gdg-app>
 <noscript>
   Please enable JavaScript to view this website.
 </noscript>
-<script type="module" src="dist/components/gdg-app.js"></script>
+<script type="module" src="src/components/gdg-app/gdg-app.ts"></script>
 </body>
 </html>

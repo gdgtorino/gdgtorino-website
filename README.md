@@ -1,22 +1,10 @@
 # GDG Torino website
 
-GDG Torino's PWA
+GDG Torino's new PWA
 
 ### Prerequisites
 
 This project requires [node.js](https://nodejs.org) and [npm](https://npmjs.org).
-
-The Polymer CLI is required to build the app and to run the development server:
-
-```bash
-$ npm install -g polymer-cli
-```
-
-Additionally the Firebase CLI is used to deploy the app to Firebase Hosting:
-
- ```bash
- $ npm install -g firebase-tools
- ```
 
 ### Install
 
@@ -26,19 +14,40 @@ To install the necessary dependencies run:
 $ npm install
 ```
 
+### Configure
+
+To configure the PWA, make a copy of the example configuration file called `config.json`:
+
+```bash
+$ cp config.example.json config.json
+```
+
+and replace the values.
+
 ### Build
 
-The following command starts typescript compilation in watch mode and Polymer's development server:
+The following command starts typescript compilation in watch mode and the live development server:
 
 ```bash
 $ npm run start
 ```
 
-To build for production run:
+to build for production run:
 
 ```bash
 $ npm run build:prod
 ```
+
+### Build Contentful types
+
+TypeScript interfaces corresponding to Content Types on Contentful can be built (or updated after changes in the CMS)
+using the following command:
+
+```bash
+$ npm run build:ctypes
+```
+
+**Note** that this needs a `managementToken` and a `space` to be set in config.json to work properly.
 
 ### License
 

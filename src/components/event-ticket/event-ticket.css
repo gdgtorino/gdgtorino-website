@@ -1,0 +1,138 @@
+:host {
+    display: block;
+    transition: filter .3s ease;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+}
+
+:host(:hover) {
+    filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.2));
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.ticket-container {
+    display: flex;
+    border-radius: 4px;
+    background: white;
+    -webkit-clip-path: url(#ticketClipPathOriz);
+    -moz-clip-path: url(#ticketClipPathOriz);
+    clip-path: url(#ticketClipPathOriz);
+}
+
+.cover-image-container {
+    width: 60%;
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding-right: 4px;
+}
+
+.cover-image {
+    padding-bottom: 50%;
+    position: relative;
+}
+
+.cover-image::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 4px;
+    top: 0;
+    right: -4px;
+    bottom: 0;
+    border-right: 8px dotted #EFEFEF;
+}
+
+.cover-image iron-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.info-container {
+    flex: 1;
+    flex-basis: 0.000000001px;
+    min-width: 0;
+}
+
+.info {
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px 24px 32px;
+}
+
+h3 {
+    margin-bottom: 0;
+}
+
+.caption {
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--paper-grey-400);
+    margin-bottom: 16px;
+}
+
+.description {
+    flex: 1;
+    flex-basis: 0.000000001px;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+    line-height: 1.4;
+}
+
+.description::after {
+    content: '';
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 70%;
+    height: 1.4em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+@media (max-width: 670px) {
+    .info-container {
+        height: 0;
+        padding-bottom: 36%;
+    }
+
+    .venue,
+    .description {
+        display: none;
+    }
+
+    .cover-image::after {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 0px;
+        width: 100%;
+        top: calc(100% - 4px);
+        left: 0;
+        border-bottom: 8px dotted #EFEFEF;
+    }
+
+    .ticket-container {
+        flex-direction: column;
+        -webkit-clip-path: url(#ticketClipPathVert);
+        -moz-clip-path: url(#ticketClipPathVert);
+        clip-path: url(#ticketClipPathVert);
+    }
+
+    .cover-image-container {
+        width: 100%;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        padding-right: 0;
+        padding-bottom: 4px;
+    }
+}

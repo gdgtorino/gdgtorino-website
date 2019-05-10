@@ -1,0 +1,35 @@
+h1 {
+    font-size: 40px;
+}
+
+h1, h2 {
+    color: var(--primary-color);
+}
+
+.page-title {
+    padding: 36px 0 8px 0;
+}
+
+.page-content {
+    min-height: 500px;
+    padding-bottom: 80px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        padding: 0 16px;
+    }
+}
+
+section {
+    padding: 40px 0 80px 0;
+}
+
+.grey-bg {
+    background: var(--paper-grey-100);
+}
