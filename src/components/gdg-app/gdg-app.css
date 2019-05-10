@@ -1,0 +1,116 @@
+app-header {
+    background: white;
+}
+
+app-toolbar {
+    height: 56px;
+}
+
+paper-tabs {
+    height: 100%;
+}
+
+paper-tab {
+    padding: 0 16px;
+}
+
+paper-tab a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    height: 48px;
+    width: auto;
+}
+
+@media (max-width: 40em) {
+    .logo {
+        height: 40px;
+        width: auto;
+        margin: 4px 0 4px 16px;
+    }
+}
+
+#routerOutlet {
+    width: 100%;
+}
+
+.loading-overlay {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+}
+
+app-drawer a:first-of-type {
+    margin-top: 40px;
+}
+
+app-drawer a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    line-height: 46px;
+    padding: 0 24px;
+    margin-right: 16px;
+    outline: none;
+}
+
+app-drawer a.active {
+    font-weight: bold;
+    color: var(--primary-color);
+    background: #e7f0fe;
+    border-top-right-radius: 23px;
+    border-bottom-right-radius: 23px;
+}
+
+footer {
+    background: var(--paper-grey-100);
+    color: #a5a5a5;
+}
+
+footer > .container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 40em) {
+    footer .sm-col,
+    footer .bottom-line .container > * {
+        padding: 8px 0;
+        margin: 0;
+    }
+}
+
+footer a {
+    color: inherit;
+    text-decoration: none;
+    padding: 8px 0;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer a img {
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+footer .bottom-line {
+    background: var(--paper-grey-200);
+    padding: 8px;
+}
+
+footer .bottom-line img {
+    height: 12px;
+    width: auto;
+}
+
+footer .bottom-line a {
+    margin-left: 16px;
+}
