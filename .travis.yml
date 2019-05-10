@@ -5,6 +5,7 @@ node_js:
 before_deploy:
   - npm run build:prod
 deploy:
+  skip_cleanup: true
   provider: firebase
   on:
     branch: master
