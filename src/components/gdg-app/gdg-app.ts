@@ -1,6 +1,5 @@
 import {customElement, html, LitElement, property, query} from 'lit-element';
 import {repeat} from 'lit-html/directives/repeat';
-import {until} from 'lit-html/directives/until';
 import {Entry, EntryCollection} from 'contentful';
 import {Document} from '@contentful/rich-text-types';
 import {Router} from '@vaadin/router';
@@ -50,13 +49,13 @@ class GdgApp extends LitElement {
         this.pagesData = await ContentfulService.getRoutingData();
         this.gdg = await ContentfulService.getGdg();
         this.router = new Router(this.routerOutlet);
+        import('../pages');
         this.router.setRoutes([
             ...this.pagesData.items.map(p => ({
                 path: `/${p.fields.slug || ''}`,
                 component: p.fields.component || 'page-generic',
                 action: (context, commands) => {
                     const componentName = context.route.component;
-                    import('../pages');
                     const component = commands.component(componentName);
                     component.pageData = <PageData>{
                         ...p.fields,

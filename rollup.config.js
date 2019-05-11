@@ -1,10 +1,8 @@
 require('dotenv').config();
+import createDefaultConfig from '@open-wc/building-rollup/modern-and-legacy-config';
 import replace from "rollup-plugin-replace";
 import nodeResolve from 'rollup-plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
 import builtins from 'rollup-plugin-node-builtins';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
-import modernWeb from '@open-wc/building-rollup//plugins/rollup-plugin-modern-web/rollup-plugin-modern-web';
 import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
@@ -12,7 +10,6 @@ import litcss from 'rollup-plugin-lit-css';
 import cpy from 'rollup-plugin-cpy';
 import workbox from 'rollup-plugin-workbox-build';
 import liveServer from 'rollup-plugin-live-server';
-import {terser} from 'rollup-plugin-terser';
 
 const inProd = process.env.BUILD === 'production';
 
@@ -21,14 +18,13 @@ const mapEnvVars = vars => vars.reduce((res, envVar) => {
     return res;
 }, {});
 
-export default {
+const configs = createDefaultConfig({
     input: './index.html',
-    treeshake: inProd,
-    output: {
-        dir: 'dist',
-        format: 'esm',
-        sourcemap: true,
-    },
+    outputDir: 'dist',
+});
+
+export default configs.map(config => ({
+    ...config,
     plugins: [
         replace(mapEnvVars([
             'CONTENTFUL_SPACE_ID',
@@ -37,42 +33,18 @@ export default {
             'EVENTBRITE_ORG_ID',
             'EVENTBRITE_TOKEN',
         ])),
-        inProd && minifyHTML({
-            failOnError: true,
-        }),
-        modernWeb(),
+        config.plugins[0],
+        config.plugins[1],
         builtins(),
         nodeResolve({
             browser: true,
         }),
         commonjs(),
-        babel({
-            plugins: [
-                '@babel/plugin-syntax-dynamic-import',
-                '@babel/plugin-syntax-import-meta',
-                'bundled-import-meta',
-            ],
-            presets: [
-                [
-                    '@babel/env',
-                    {
-                        targets: [
-                            'last 2 Chrome major versions',
-                            'last 2 ChromeAndroid major versions',
-                            'last 2 Edge major versions',
-                            'last 2 Firefox major versions',
-                            'last 2 Safari major versions',
-                            'last 2 iOS major versions',
-                        ],
-                        useBuiltIns: false,
-                    },
-                ],
-            ],
-        }),
         json(),
         litcss(),
+        config.plugins[3],
         typescript(),
-        inProd && terser(),
+        config.plugins[4],
         inProd && cpy({
             files: ['assets/**/*', 'manifest.json'],
             dest: 'dist/',
@@ -102,4 +74,4 @@ export default {
     watch: {
         clearScreen: false
     },
-};
+}));
