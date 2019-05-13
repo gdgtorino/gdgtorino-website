@@ -29,7 +29,7 @@ EVENTBRITE_TOKEN=...
 
 ### Build
 
-The following command starts typescript compilation in watch mode and the live development server:
+The following command starts Rollup compilation in watch mode and the live development server:
 
 ```bash
 $ npm run start
