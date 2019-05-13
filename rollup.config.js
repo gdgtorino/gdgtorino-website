@@ -23,7 +23,9 @@ const configs = createDefaultConfig({
     outputDir: 'dist',
 });
 
-export default configs.map(config => ({
+const once = (index, plugins) => index === 0 ? plugins : [];
+
+export default configs.map((config, i) => ({
     ...config,
     plugins: [
         replace(mapEnvVars([
@@ -45,31 +47,33 @@ export default configs.map(config => ({
         config.plugins[3],
         typescript(),
         config.plugins[4],
-        inProd && cpy({
-            files: ['assets/**/*', 'manifest.json'],
-            dest: 'dist/',
-            options: {
-                parents: true,
-            },
-        }),
-        inProd && workbox({
-            mode: 'generateSW',
-            options: require('./workbox.config'),
-        }),
-        !inProd && liveServer({
-            port: 8200,
-            host: 'localhost',
-            root: 'dist',
-            file: 'index.html',
-            mount: [
-                ['/dist', './dist'],
-                ['/node_modules', './node_modules'],
-                ['/assets', './assets'],
-                ['/manifest.json', './manifest.json'],
-            ],
-            open: false,
-            wait: 200,
-        }),
+        ...once(i, [
+            inProd && cpy({
+                files: ['assets/**/*', 'manifest.json'],
+                dest: 'dist/',
+                options: {
+                    parents: true,
+                },
+            }),
+            inProd && workbox({
+                mode: 'generateSW',
+                options: require('./workbox.config'),
+            }),
+            !inProd && liveServer({
+                port: 8200,
+                host: 'localhost',
+                root: 'dist',
+                file: 'index.html',
+                mount: [
+                    ['/dist', './dist'],
+                    ['/node_modules', './node_modules'],
+                    ['/assets', './assets'],
+                    ['/manifest.json', './manifest.json'],
+                ],
+                open: false,
+                wait: 200,
+            }),
+        ]),
     ],
     watch: {
         clearScreen: false
