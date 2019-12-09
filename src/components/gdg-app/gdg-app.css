@@ -30,7 +30,7 @@ paper-tab a {
 
 @media (max-width: 40em) {
     .logo {
-        height: 40px;
+        height: 22px;
         width: auto;
         margin: 4px 0 4px 16px;
     }
