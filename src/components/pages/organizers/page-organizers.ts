@@ -38,7 +38,7 @@ class PageOrganizers extends RouterPage {
                 
                     <div class="organizer sm-col sm-col-6 md-col-4 lg-col-3">
                       <div class="organizer-pic-container ${organizer.fields.inTeam ? getTeamId(organizer.fields.inTeam.fields.name) : null}"
-                           title=${organizer.fields.inTeam ? `Faccio parte del team ${organizer.fields.inTeam.fields.name.toLowerCase()}!` : `Sono un ${organizer.fields.level.substr(2).toLowerCase()}!`}>
+                           title=${organizer.fields.inTeam ? `Sono nel team ${organizer.fields.inTeam.fields.name.toLowerCase()}` : `Sono un ${organizer.fields.level.substr(2).toLowerCase()}`}>
                         <div class="organizer-pic"
                              style=${styleMap({
                                backgroundImage: this.profilePicUrl(organizer),
