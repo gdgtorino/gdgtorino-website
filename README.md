@@ -1,6 +1,8 @@
+<img alt="GDG Torino logos &amp; wordmark" src="assets/images/complete-logo+wordmark.png" height="200">
+
 # GDG Torino website
 
-GDG Torino's new PWA
+GDG Torino's PWA built with Polymer, Rollup & Workbox.
 
 ### Prerequisites
 
