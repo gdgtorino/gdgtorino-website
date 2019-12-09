@@ -3,7 +3,7 @@ import { Asset, Entry, IAsset, IEntry, ILink, isAsset, isEntry, ISys } from "../
 import { ISocialLink, SocialLink } from "./social_link";
 
 export interface IGdgFields {
-  location?: string;
+  location: string;
   logo?: ILink<'Asset'> | IAsset;
   description?: string;
   abstract?: string;
@@ -28,7 +28,7 @@ export class Gdg extends Entry<IGdgFields> implements IGdg {
   public readonly sys!: ISys<'Entry'>;
   public readonly fields!: IGdgFields;
 
-  get location(): string | undefined {
+  get location(): string {
     return this.fields.location
   }
 

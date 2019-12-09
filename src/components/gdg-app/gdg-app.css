@@ -23,7 +23,8 @@ paper-tab a {
 }
 
 .logo {
-    height: 48px;
+    display: block;
+    height: 22px;
     width: auto;
 }
 
@@ -113,4 +114,9 @@ footer .bottom-line img {
 
 footer .bottom-line a {
     margin-left: 16px;
+}
+
+.footer-logo {
+    height: 70px;
+    width: auto;
 }

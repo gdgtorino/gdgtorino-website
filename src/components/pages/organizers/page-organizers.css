@@ -4,12 +4,36 @@
     align-items: center;
     padding: 16px;
     text-align: center;
+    position: relative;
 }
 
 .organizer .name {
     padding: 16px 0 8px 0;
     font-size: 16px;
     font-weight: bold;
+}
+
+.organizer-pic-container {
+    padding: 3px;
+    background-color: #AEAEAE;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.organizer-pic-container.dev {
+    background: linear-gradient(135deg, #02a645, #71e8a3);
+}
+
+.organizer-pic-container.comunicazione {
+    background: linear-gradient(135deg, #0082fe, #b1d9ff);
+}
+
+.organizer-pic-container.relazioni-esterne {
+    background: linear-gradient(135deg, #ff001b, #fdb1b9);
+}
+
+.organizer-pic-container.design {
+    background: linear-gradient(135deg, #ffb800, #ffe5a2);
 }
 
 .organizer-pic {
@@ -19,6 +43,7 @@
     border-radius: 50%;
     background-size: cover;
     background-color: #EEE;
+    border: 3px solid white;
 }
 
 .team-name {
