@@ -11,7 +11,8 @@ export const getUpcomingEvents = (): Promise<any> => {
     if (cache.has(key)) {
         return cache.get(key);
     }
-    const res = fetchJson(`${baseUrl}events/search/?token=${token}&organizer.id=${organizationId}&sort_by=-date&expand=venue`);
+    //const res = fetchJson(`${baseUrl}events/search/?token=${token}&organizer.id=${organizationId}&sort_by=-date&expand=venue`);
+    const res = fetchJson(`${baseUrl}organizers/${organizationId}/events/?token=${token}&order_by=start_desc&expand=venue&status=live`);
     cache.set(key, res);
     return res;
 };
