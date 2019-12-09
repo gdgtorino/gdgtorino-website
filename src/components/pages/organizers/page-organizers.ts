@@ -12,19 +12,24 @@ import basscssGrid from 'basscss-grid/css/grid.css';
 import basscssFlex from 'basscss-flexbox/css/flexbox.css';
 import basscssLayout from 'basscss-layout/css/layout.css';
 import basscssMargin from 'basscss-margin/css/margin.css';
-import {IOrganizerFields} from '../../../content-types/generated';
+import {IOrganizerFields, Organizer} from '../../../content-types/generated';
 import {renderErrorView} from '../../error-view/error-view';
 
-const groupByTeam = (teams: { [key: string]: IOrganizerFields[] }, org: Entry<IOrganizerFields>) => {
+/*const groupByTeam = (teams: { [key: string]: IOrganizerFields[] }, org: Entry<IOrganizerFields>) => {
     const teamId = org.fields.inTeam &&
     org.fields.level &&
     org.fields.level !== 'General manager' &&
-    org.fields.level !== 'Lead'
+    org.fields.level !== 'Lead' &&
+    org.fields.level !== 'Mentor'
         ? org.fields.inTeam.sys.id : 'other';
     teams[teamId] = teams[teamId] || [];
     teams[teamId].push(org.fields);
     return teams;
-};
+};*/
+
+const getTeamId = (teamName: string) => teamName.replace(/ /g, '-')
+    .toLowerCase()
+    .trim();
 
 @customElement('page-organizers')
 class PageOrganizers extends RouterPage {
@@ -32,10 +37,10 @@ class PageOrganizers extends RouterPage {
     static styles = [style, sharedStyles, basscssFlex, basscssGrid, basscssLayout, basscssMargin];
 
     teams = ContentfulService.getTeams();
-    organizers = ContentfulService.getOrganizers()
-        .then(orgs => orgs.reduce(groupByTeam, {}));
+    organizers = ContentfulService.getOrganizers();
+        // .then(orgs => orgs.reduce(groupByTeam, {}));
 
-    @property() orgsByTeam = Promise.all([this.teams, this.organizers])
+    /*@property() orgsByTeam = Promise.all([this.teams, this.organizers])
         .then(([teams, organizers]) => {
             return [
                 {
@@ -47,7 +52,7 @@ class PageOrganizers extends RouterPage {
                     organizers: organizers[team.sys.id],
                 })),
             ];
-        });
+        });*/
 
     render() {
         return html`
@@ -57,24 +62,29 @@ class PageOrganizers extends RouterPage {
               
               <div class="clearfix organizers">
               
-              ${until(this.orgsByTeam.then(teams => repeat(teams, team => html`
+              ${until(this.organizers.then(orgs => repeat(orgs, (organizer: any) => html`
                 
-                  ${team.organizers ? repeat(team.organizers, (organizer: any) => html`
-
                     <div class="organizer sm-col sm-col-6 md-col-4 lg-col-3">
                       <div class="organizer-pic"
                            style=${styleMap({
                              backgroundImage: this.profilePicUrl(organizer),
-                           })}></div>
+                           })}> 
+                      </div>
+                      
+                      ${organizer.fields.inTeam ? html`
+                        <span class="team-badge ${getTeamId(organizer.fields.inTeam.fields.name)}"
+                              title="Sono in ${organizer.fields.inTeam.fields.name.toLowerCase()}!">                              
+                        </span>
+                      ` : null}
                        
-                       <div class="name">${organizer.name}</div>
+                      <div class="name">${organizer.fields.name}</div>
                        
-                       ${organizer.role ? html`<div>${organizer.role}</div>` : null}
+                       ${organizer.fields.role ? html`<div>${organizer.fields.role}</div>` : null}
                        
-                       ${organizer.socialLinks ? html`
+                       ${organizer.fields.socialLinks ? html`
                          <div class="social-links">
                            
-                           ${repeat(organizer.socialLinks, (link: any) => html`
+                           ${repeat(organizer.fields.socialLinks, (link: any) => html`
                              <a href=${link.fields.url} target="_blank" rel="noopener"><img src=${link.fields.icon.fields.file.url}></a>
                            `)}
                            
@@ -83,8 +93,6 @@ class PageOrganizers extends RouterPage {
                        
                     </div>
                     
-                  `) : null}
-                
               `)).catch(renderErrorView))}
               
               </div>
@@ -94,8 +102,7 @@ class PageOrganizers extends RouterPage {
         `;
     }
 
-
     private profilePicUrl(organizer: any): string {
-        return organizer.profilePicture ? `url(${organizer.profilePicture.fields.file.url})` : null;
+        return organizer.fields.profilePicture ? `url(${organizer.fields.profilePicture.fields.file.url})` : null;
     }
 }
