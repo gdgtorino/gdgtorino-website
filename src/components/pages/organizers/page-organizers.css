@@ -13,6 +13,29 @@
     font-weight: bold;
 }
 
+.organizer-pic-container {
+    padding: 3px;
+    background-color: #AEAEAE;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.organizer-pic-container.dev {
+    background: linear-gradient(135deg, #02a645, #71e8a3);
+}
+
+.organizer-pic-container.comunicazione {
+    background: linear-gradient(135deg, #0082fe, #b1d9ff);
+}
+
+.organizer-pic-container.relazioni-esterne {
+    background: linear-gradient(135deg, #ff001b, #fdb1b9);
+}
+
+.organizer-pic-container.design {
+    background: linear-gradient(135deg, #ffb800, #ffe5a2);
+}
+
 .organizer-pic {
     width: 200px;
     height: 200px;
@@ -20,38 +43,12 @@
     border-radius: 50%;
     background-size: cover;
     background-color: #EEE;
+    border: 3px solid white;
 }
 
 .team-name {
     font-size: 32px;
     margin-top: 38px;
-}
-
-.team-badge {
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    top: 7%;
-    left: 17%;
-    border-radius: 50%;
-    border: 4px solid white;
-}
-
-.team-badge.dev {
-    background-color: #02a645;
-}
-
-.team-badge.comunicazione {
-    background-color: #0082fe;
-}
-
-.team-badge.relazioni-esterne {
-    background-color: #ff001b;
-}
-
-.team-badge.design {
-    background-color: #ffb800;
 }
 
 .organizers {

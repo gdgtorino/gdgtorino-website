@@ -125,7 +125,7 @@ class GdgApp extends LitElement {
                     <div class="container clearfix">
                     
                       <div class="sm-col sm-col-3">
-                        <img src="../../assets/images/logo-grey.svg" class="footer-logo">
+                        <img src="../../assets/images/logo-grey.png" class="footer-logo">
                       </div>
                       
                       <div class="sm-col sm-col-3 flex flex-column">

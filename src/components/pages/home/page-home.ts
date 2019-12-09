@@ -47,7 +47,7 @@ class PageHome extends RouterPage {
           
           <div class="container">
             <section>
-              <h3>I nostri partner</h3>
+              <h3>Abbiamo collaborato con</h3>
               <div class="partners flex flex-wrap items-center justify-center">
                 ${until(ContentfulService.getPartners().then(partners =>
                   repeat(partners.items, (p: any) => html`

@@ -15,18 +15,6 @@ import basscssMargin from 'basscss-margin/css/margin.css';
 import {IOrganizerFields, Organizer} from '../../../content-types/generated';
 import {renderErrorView} from '../../error-view/error-view';
 
-/*const groupByTeam = (teams: { [key: string]: IOrganizerFields[] }, org: Entry<IOrganizerFields>) => {
-    const teamId = org.fields.inTeam &&
-    org.fields.level &&
-    org.fields.level !== 'General manager' &&
-    org.fields.level !== 'Lead' &&
-    org.fields.level !== 'Mentor'
-        ? org.fields.inTeam.sys.id : 'other';
-    teams[teamId] = teams[teamId] || [];
-    teams[teamId].push(org.fields);
-    return teams;
-};*/
-
 const getTeamId = (teamName: string) => teamName.replace(/ /g, '-')
     .toLowerCase()
     .trim();
@@ -36,23 +24,7 @@ class PageOrganizers extends RouterPage {
 
     static styles = [style, sharedStyles, basscssFlex, basscssGrid, basscssLayout, basscssMargin];
 
-    teams = ContentfulService.getTeams();
     organizers = ContentfulService.getOrganizers();
-        // .then(orgs => orgs.reduce(groupByTeam, {}));
-
-    /*@property() orgsByTeam = Promise.all([this.teams, this.organizers])
-        .then(([teams, organizers]) => {
-            return [
-                {
-                    team: {name: 'Leads'},
-                    organizers: organizers['other'],
-                },
-                ...teams.items.map(team => ({
-                    team: team.fields,
-                    organizers: organizers[team.sys.id],
-                })),
-            ];
-        });*/
 
     render() {
         return html`
@@ -65,18 +37,15 @@ class PageOrganizers extends RouterPage {
               ${until(this.organizers.then(orgs => repeat(orgs, (organizer: any) => html`
                 
                     <div class="organizer sm-col sm-col-6 md-col-4 lg-col-3">
-                      <div class="organizer-pic"
-                           style=${styleMap({
-                             backgroundImage: this.profilePicUrl(organizer),
-                           })}> 
+                      <div class="organizer-pic-container ${organizer.fields.inTeam ? getTeamId(organizer.fields.inTeam.fields.name) : null}"
+                           title=${organizer.fields.inTeam ? `Faccio parte del team ${organizer.fields.inTeam.fields.name.toLowerCase()}!` : `Sono un ${organizer.fields.level.substr(2).toLowerCase()}!`}>
+                        <div class="organizer-pic"
+                             style=${styleMap({
+                               backgroundImage: this.profilePicUrl(organizer),
+                             })}> 
+                        </div>
                       </div>
                       
-                      ${organizer.fields.inTeam ? html`
-                        <span class="team-badge ${getTeamId(organizer.fields.inTeam.fields.name)}"
-                              title="Sono in ${organizer.fields.inTeam.fields.name.toLowerCase()}!">                              
-                        </span>
-                      ` : null}
-                       
                       <div class="name">${organizer.fields.name}</div>
                        
                        ${organizer.fields.role ? html`<div>${organizer.fields.role}</div>` : null}
