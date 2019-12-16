@@ -17,7 +17,7 @@ const contentfulClient: ContentfulClientApi = createClient(<any>{
 export const getRoutingData = (): Promise<EntryCollection<IPageFields>> => {
     return contentfulClient.getEntries<IPageFields>({
         content_type: 'page',
-        select: 'fields.slug,fields.component,fields.mainNavigationItem,fields.name,fields.order',
+        select: 'fields.slug,fields.component,fields.mainNavigationItem,fields.name,fields.order,fields.description,fields.image',
         order: 'fields.order',
     });
 };
