@@ -14,7 +14,7 @@ export interface IOrganizerFields {
   website?: string;
 }
 
-export type OrganizerLevel = 'General manager' | 'Lead' | 'Organizer' | 'Supporter' | 'Mentor';
+export type OrganizerLevel = '1 Main lead' | '2 Lead' | '3 Organizer' | '4 Supporter' | '5 Mentor';
 
 /**
  * Organizer
