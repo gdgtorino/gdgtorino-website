@@ -5,9 +5,11 @@ import { ISocialLink, SocialLink } from "./social_link";
 export interface IGdgFields {
   location: string;
   logo?: ILink<'Asset'> | IAsset;
+  email?: string;
   description?: string;
   abstract?: string;
   socialLinks?: Array<ILink<'Entry'> | ISocialLink>;
+  mainGallery?: Array<ILink<'Asset'> | IAsset>;
 }
 
 /**
@@ -37,6 +39,10 @@ export class Gdg extends Entry<IGdgFields> implements IGdg {
       (isAsset(this.fields.logo) ? new Asset(this.fields.logo) : null)
   }
 
+  get email(): string | undefined {
+    return this.fields.email
+  }
+
   get description(): string | undefined {
     return this.fields.description
   }
@@ -56,6 +62,20 @@ export class Gdg extends Entry<IGdgFields> implements IGdg {
     return !this.fields.socialLinks ? undefined :
       this.fields.socialLinks.map((item) =>
         isEntry(item) ? wrap<'socialLink'>(item) : null
+      )
+  }
+
+  get mainGallery(): Array<Asset | null> | undefined {
+    return !this.fields.mainGallery ? undefined :
+      this.fields.mainGallery.map((item) =>
+        isAsset(item) ? new Asset(item) : null
+      )
+  }
+
+  get main_gallery(): Array<Asset | null> | undefined {
+    return !this.fields.mainGallery ? undefined :
+      this.fields.mainGallery.map((item) =>
+        isAsset(item) ? new Asset(item) : null
       )
   }
 
