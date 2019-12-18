@@ -48,6 +48,7 @@ class GdgApp extends LitElement {
     async firstUpdated() {
         this.pagesData = await ContentfulService.getRoutingData();
         this.gdg = await ContentfulService.getGdg();
+        console.log('Gdg', this.gdg);
         this.router = new Router(this.routerOutlet);
         import('../pages');
         this.router.setRoutes([
@@ -65,12 +66,13 @@ class GdgApp extends LitElement {
                     };
                     const pageName = component.pageData.name;
                     const pageSlug = component.pageData.slug;
-                    const pageImage = component.pageData.image;
+                    const pageImage = component.pageData.image || this.gdg.fields.logo;
+                    console.log('Page image', pageImage);
                     this.gdgName = `GDG ${this.gdg.fields.location}`;
                     headful({
                         title: pageSlug ? `${pageName} | ${this.gdgName}` : this.gdgName,
                         description: component.pageData.description,
-                        image: pageImage ? pageImage.fields.file.fields.url : '',
+                        image: pageImage ? pageImage.fields.file.url : '',
                     });
                     return component;
                 },
