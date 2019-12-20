@@ -29,6 +29,7 @@ import {IGdgFields, IPageFields} from '../../content-types/generated';
 import {PageData} from '../pages/router-page';
 import {AppDrawerElement} from '@polymer/app-layout/app-drawer/app-drawer';
 import {classMap} from 'lit-html/directives/class-map';
+import {chunk} from '../../utils/chunk';
 
 @customElement('gdg-app')
 class GdgApp extends LitElement {
@@ -136,10 +137,16 @@ class GdgApp extends LitElement {
                         `)}
                       </div>
                       
-                      <div class="sm-col sm-col-3 flex flex-column">
-                        ${this.gdg ? repeat(this.gdg.fields.socialLinks, (p: any) => html`
-                            <a href=${p.fields.url} target="_blank" rel="noopener"><img src=${p.fields.icon.fields.file.url}>${p.fields.text}</a>
-                          `) : null}
+                      <div class="sm-col sm-col-3 flex">
+                        ${this.gdg ? repeat(chunk(this.gdg.fields.socialLinks, 4), (group: any) => html`
+                          <div class="flex flex-column flex-auto">
+                            ${repeat(group, (social: any) => html`
+                              <a href=${social.fields.url} target="_blank" rel="noopener">
+                                <img src=${social.fields.icon.fields.file.url} alt=${social.fields.description}>
+                              </a>
+                            `)}
+                          </div>
+                        `) : null}
                       </div>
                       
                       <div class="sm-col sm-col-3 flex flex-column">
