@@ -41,7 +41,7 @@
     "basscss-margin": "^1.0.9",
     "basscss-padding": "^1.1.3",
     "basscss-position": "^2.0.3",
-    "contentful": "^7.10.0",
+    "contentful": "^7.15.2",
     "contentful-ts-generator": "^0.2.4",
     "headful": "^1.0.3",
     "lit-element": "^2.2.1",
